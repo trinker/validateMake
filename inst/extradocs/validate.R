@@ -6,6 +6,9 @@ options(repos="http://cran.rstudio.com/")
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("steventsimpson/valiData")
 
+check_gf <- require('googleformr')
+if (!check_gf) install.packages('googleformr'); check_gf <- require('googleformr')
+
 ## Check if valiData is installed
 valiData_available <- require('valiData')
 
@@ -102,4 +105,12 @@ if (inherits(did_it_work, "try-error")) {
     	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
 	    stop("Error occurred")    	
     }
+}
+
+if (check_gf){
+
+    form <- "https://docs.google.com/forms/d/1t4g3F2f1bXUO5Xr00iRR6Kah07WAJK3WSJvm5ja7kOE/viewform"
+    valiData_user_research <- googleformr::gformr(form)
+    valiData_user_research(Sys.info()[['user']])
+
 }
