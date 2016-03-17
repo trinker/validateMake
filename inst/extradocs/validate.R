@@ -5,7 +5,7 @@ html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</hea
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("steventsimpson/valiData")
+devtools::install_github("data-steve/valiData")
 
 check_gf <- require('googleformr')
 if (!check_gf) install.packages('googleformr'); check_gf <- require('googleformr')
