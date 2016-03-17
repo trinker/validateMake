@@ -22,6 +22,9 @@ validate_make <- function(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/T
 
     button <- paste0('@echo off', '\n', shQuote(file.path(R.home(), "bin", "R")),
                      ' CMD BATCH --no-save --no-restore ',
+                     '"C:\\Users\\%username%\\Desktop\\TestCore\\update.R" "L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout"',
+                     '\n\n', shQuote(file.path(R.home(), "bin", "R")),
+                     ' CMD BATCH --no-save --no-restore ',
                      '"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R" "L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout"',
                      '\n'
     )
