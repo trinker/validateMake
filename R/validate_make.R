@@ -29,10 +29,11 @@ validate_make <- function(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/T
     # make button.bat
     cat(button, file=file.path(path, 'button.bat'))
 
+    #copy update.R, validate.R script, and README
     script <- system.file("extradocs", package = "validateMake")
     file.copy(dir(script, full.names = TRUE), file.path(path, dir(script)), TRUE)
 
-    verify <- all(c("button.bat", "README.txt", "validate.R") %in% dir(path, all.files = TRUE))
+    verify <- all(c("button.bat", "README.txt", "validate.R", "update.R") %in% dir(path, all.files = TRUE))
 
     if (isTRUE(verify)) {
         message("Looks like everything went according to plan...")
