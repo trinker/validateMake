@@ -1,4 +1,4 @@
-#version: 1.01
+#version: 1.02
 setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
@@ -110,9 +110,10 @@ if (inherits(did_it_work, "try-error")) {
 
 ## send user name and time stamp for user research
 if (check_gf){
-
-    form <- "https://docs.google.com/forms/d/1t4g3F2f1bXUO5Xr00iRR6Kah07WAJK3WSJvm5ja7kOE/viewform"
-    valiData_user_research <- googleformr::gformr(form)
-    valiData_user_research(Sys.info()[['user']])
+    if( Sys.info()[['user']] != "trinker"){}
+        form <- "https://docs.google.com/forms/d/1t4g3F2f1bXUO5Xr00iRR6Kah07WAJK3WSJvm5ja7kOE/viewform"
+        valiData_user_research <- googleformr::gformr(form)
+        valiData_user_research(Sys.info()[['user']])
+    }
 
 }
