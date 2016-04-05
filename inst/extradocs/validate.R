@@ -110,7 +110,7 @@ if (inherits(did_it_work, "try-error")) {
 
 ## send user name and time stamp for user research
 if (check_gf){
-    if( Sys.info()[['user']] != "trinker"){}
+    if( Sys.info()[['user']] != "trinker"){
         form <- "https://docs.google.com/forms/d/1t4g3F2f1bXUO5Xr00iRR6Kah07WAJK3WSJvm5ja7kOE/viewform"
         valiData_user_research <- googleformr::gformr(form)
         valiData_user_research(Sys.info()[['user']])
