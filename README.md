@@ -1,5 +1,11 @@
+1. Install R in root directory (`C:`): https://cran.r-project.org
+2. Install RTools: https://cran.r-project.org
+3. From R's command line run the following script:
+
 ```
+install.packages('devtools')
+install.packages('pacman')
 if (!require("pacman")) install.packages("pacman")
-pacman::p_install_gh('trinker/validateMake')
+pacman::p_install_gh(c("data-steve/valiData", 'trinker/validateMake'))
 validateMake::validate_make()
 ```
