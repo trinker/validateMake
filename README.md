@@ -3,8 +3,7 @@
 3. From R's command line run the following script:
 
 ```
-install.packages('devtools')
-install.packages('pacman')
+install.packages(c('devtools', 'pacman'))
 if (!require("pacman")) install.packages("pacman")
 pacman::p_install_gh(c("data-steve/valiData", 'trinker/validateMake'))
 validateMake::validate_make()
