@@ -1,11 +1,11 @@
-#version: 1.03
+#version: 1.04
 setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("data-steve/valiData")
+#devtools::install_github("data-steve/valiData")
 
 check_gf <- require('googleformr')
 if (!check_gf) install.packages('googleformr'); check_gf <- require('googleformr')
