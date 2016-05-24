@@ -1,4 +1,4 @@
-#version: 1.05
+#version: 1.06
 setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
@@ -111,7 +111,7 @@ if (check_gf){
 }
 
 ## send validated report as .rds
-if(!Sys.info()[['user']] %in% c("ftrinker", "ssimpson")){
+if(!Sys.info()[['user']] %in% c("trinker", "ssimpson")){
     storage_loc <- file.path(
         l_drive_go("swiper/valiData/data_store"),
         paste0(
