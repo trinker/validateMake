@@ -1,11 +1,11 @@
-#version: 1.04
+#version: 1.05
 setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
 if (!require("devtools")) install.packages("devtools")
-#devtools::install_github("data-steve/valiData")
+devtools::install_github("data-steve/valiData")
 
 check_gf <- require('googleformr')
 if (!check_gf) install.packages('googleformr'); check_gf <- require('googleformr')
@@ -46,7 +46,12 @@ if (length(path) == 0) {
 }
 
 ## Check if the map is available and read in
-map_loc <- "L:/swiper/DataScience/data_quality/core_data_mapping/core_data_map.rds"
+l_drive_go <- function (where_to = "") {
+    file.path(ifelse(Sys.info()["sysname"] == "Windows", "L:", 
+        "/Volumes/shared"), where_to)
+}
+
+map_loc <- l_drive_go("swiper/valiData/Core_Data_Dictionary_DS_longforms.xlsx")
 if (!file.exists(map_loc)) {
 	cat(
          sprintf(html_message , "The Data Map appears to be missing."),
@@ -57,27 +62,11 @@ if (!file.exists(map_loc)) {
 }
 
 
-core_data_map <- readRDS(map_loc)
-
-
-## Check if the column map is available and read in
-col_map_loc <- "L:/swiper/DataScience/data_quality/core_data_mapping/column_mapping.rds"
-if (!file.exists(col_map_loc)) {
-	cat(
-         sprintf(html_message , "The Column Tests Map appears to be missing."),
-	     file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
-	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
-	stop("Error occurred")
-}
-
-
-col_map <- readRDS(col_map_loc)
-
+map <- import_map(map_loc)
 
 
 ## Run valiData and produce reports
-did_it_work <- try(valiData::valiData(path, core_data_map, col_map))
+did_it_work <- try(valiData::valiData(path, map))
 
 ## If valiData ran then try to move the files over to Desktop
 ## Otherwise give error in browser
@@ -90,8 +79,11 @@ if (inherits(did_it_work, "try-error")) {
 	stop("Error occurred")
 } else {
 
-	## make VALIDATED_DATA folder on Desktop and move over folder from TestCore
-	dir.create(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA"))
+    ## actually makes the report
+    print(did_it_work, as.report = TRUE, delete = TRUE)
+
+    ## make VALIDATED_DATA folder on Desktop and move over folder from TestCore
+    dir.create(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA"))
     file.copy(path, file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA"), recursive = TRUE)
 
     ## If move was successful delete folder from TEstCore
@@ -110,10 +102,24 @@ if (inherits(did_it_work, "try-error")) {
 
 ## send user name and time stamp for user research
 if (check_gf){
-    if( Sys.info()[['user']] != "trinker"){
+    if(!Sys.info()[['user']] %in% c("trinker", "ssimpson")){
         form <- "https://docs.google.com/forms/d/1t4g3F2f1bXUO5Xr00iRR6Kah07WAJK3WSJvm5ja7kOE/viewform"
         valiData_user_research <- googleformr::gformr(form)
         valiData_user_research(Sys.info()[['user']])
     }
 
 }
+
+## send validated report as .rds
+if(!Sys.info()[['user']] %in% c("ftrinker", "ssimpson")){
+    storage_loc <- file.path(
+        l_drive_go("swiper/valiData/data_store"),
+        paste0(
+            paste(basename(path), gsub("\\s+", "_", gsub(":", ".", Sys.time())), Sys.info()[['user']], sep="__"),
+            '.rds'
+        )
+    )
+
+    saveRDS(did_it_work, storage_loc)
+}
+
