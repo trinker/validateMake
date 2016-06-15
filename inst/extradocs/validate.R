@@ -1,4 +1,4 @@
-#version: 1.07
+#version: 1.08
 setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
@@ -70,12 +70,25 @@ did_it_work <- try(valiData::valiData(path, map))
 
 ## If valiData ran then try to move the files over to Desktop
 ## Otherwise give error in browser
-if (inherits(did_it_work, "try-error")) {
+if (!inherits(did_it_work, "try-error")) {
 	cat(
         sprintf(html_message , "Some sort of error occurred in `valiData` function."),
 	    file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
 	)
 	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+
+    pers_dir <- file.path(l_drive_go("Products/Data_Science/Data_Valiadtion/Error_Data"), Sys.info()[['user']])
+    unlink(pers_dir, recursive = TRUE, force = TRUE)
+    suppressWarnings(dir.create(pers_dir))
+
+    file.copy(
+        path,
+        pers_dir, 
+        overwrite = TRUE, 
+        recursive = TRUE
+    )
+
+
 	stop("Error occurred")
 } else {
 
