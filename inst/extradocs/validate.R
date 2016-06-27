@@ -1,6 +1,22 @@
-#version: 1.09
-setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
+#version: 1.10
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
+
+if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive for Business/Desktop'))) {
+    desktop <- 'OneDrive for Business/Desktop'
+} else {
+    if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive - Campus Labs/Desktop'))) {
+        desktop <- 'OneDrive - Campus Labs/Desktop'
+    } else {
+        if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'Desktop'))) {
+            desktop <- 'Desktop'
+        }
+    }
+}
+
+desktop <- file.path(Sys.getenv("USERPROFILE"), desktop)
+
+setwd(file.path(desktop, "TestCore"))
+
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
@@ -16,9 +32,9 @@ valiData_available <- require('valiData')
 if (!valiData_available) {
 	cat(
          sprintf(html_message , "`valiData` not installed."),
-	     file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	     file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 	stop("Error occurred")
 }
 
@@ -29,9 +45,9 @@ path <- list.dirs(recursive = FALSE)
 if (length(path) > 1) {
 	cat(
          sprintf(html_message , "More than one directory located in 'TestCore'.<br>Remove additional file.<br><br>If that doesn't work...<br>"),
-	     file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	     file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 	stop("Error occurred")
 }
 
@@ -39,9 +55,9 @@ if (length(path) > 1) {
 if (length(path) == 0) {
 	cat(
          sprintf(html_message , "It appears there is no test directory located in 'TestCore'.<br>Put a file in TestCore.<br><br>If that doesn't work...<br>"),
-	     file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	     file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 	stop("Error occurred")
 }
 
@@ -55,9 +71,9 @@ map_loc <- l_drive_go("swiper/valiData/Core_Data_Dictionary_DS_longforms.xlsx")
 if (!file.exists(map_loc)) {
 	cat(
          sprintf(html_message , "The Data Map appears to be missing."),
-	     file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	     file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 	stop("Error occurred")
 }
 
@@ -73,9 +89,9 @@ did_it_work <- try(valiData::valiData(path, map))
 if (inherits(did_it_work, "try-error")) {
 	cat(
         sprintf(html_message , "Some sort of error occurred in `valiData` function."),
-	    file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	    file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 
     pers_dir <- file.path(l_drive_go("Products/Data_Science/Data_Valiadtion/Error_Data"), Sys.info()[['user']])
     unlink(pers_dir, recursive = TRUE, force = TRUE)
@@ -106,9 +122,9 @@ if (inherits(did_it_work, "try-error")) {
     } else {
     	cat(
             sprintf(html_message , "Folder not moved to Desktop.<br>Please manually move folder out of TestCore.<br><br>If this problem persists..<br>"),
-    	    file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+    	    file = file.path(desktop, "ERROR.html")
     	)
-    	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+    	browseURL(file.path(desktop, "ERROR.html"))
 	    stop("Error occurred")
     }
 }
@@ -153,9 +169,9 @@ did_id_check_work <- try(
 if (inherits(did_id_check_work, "try-error")) {
 	cat(
         sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function."),
-	    file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+	    file = file.path(desktop, "ERROR.html")
 	)
-	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+	browseURL(file.path(desktop, "ERROR.html"))
 	stop("Error occurred")
 } else {
 
@@ -175,9 +191,9 @@ if (inherits(did_id_check_work, "try-error")) {
     if (!file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
     	cat(
             sprintf(html_message , "PersonIdentifier_Report not run.<br>Contact...<br>"),
-    	    file = file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html')
+    	    file = file.path(desktop, "ERROR.html")
     	)
-    	browseURL(file.path(Sys.getenv("USERPROFILE"),'Desktop/ERROR.html'))
+    	browseURL(file.path(desktop, "ERROR.html"))
 	    stop("Error occurred")
     }
 }
