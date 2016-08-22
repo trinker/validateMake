@@ -1,5 +1,5 @@
-#version: 1.10
-html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body>\n%s  Contact Steve -n- Tyler. <br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
+#version: 1.11
+html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive for Business/Desktop'))) {
     desktop <- 'OneDrive for Business/Desktop'
@@ -153,49 +153,65 @@ if(!Sys.info()[['user']] %in% c("trinker", "ssimpson")){
 }
 
 
-## check personID against accounts.csv
-did_id_check_work <- try(
-	valiData:::compare_column(
+## Check that personID in child files is found in accounts
+##   First ensure 'Accounts/AccountImports/xxx.csv' exists
+accts <- file.path(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA", basename(path)), 'Accounts/AccountImports')
+acc_csvs_valid <- file.exists(accts) && length(dir(accts, pattern = ".csv$") > 0) 
+dir(accts, pattern = ".csv$")  # left for debugging purposes
+file.exists(accts)             # left for debugging purposes
+if (acc_csvs_valid) {
+
+
+    ## check personID against accounts.csv
+    did_id_check_work <- try(
+        valiData:::compare_column(
 		path = file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA", basename(path)),
 		column='PersonIdentifier',
 		parent='AccountImports',
 		child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
 		ignore.case = TRUE
-	)
-)
+        )
+    )
 
-## If valiData:::compare_column ran then try to move the files over to Desktop
-## Otherwise give error in browser
-if (inherits(did_id_check_work, "try-error")) {
-	cat(
-        sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function."),
-	    file = file.path(desktop, "ERROR.html")
-	)
-	browseURL(file.path(desktop, "ERROR.html"))
-	stop("Error occurred")
-} else {
 
-    ## actually makes the report
-	sink(
-		file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"),
-		append = FALSE,
-		split = TRUE
-	)
-
-    valiData:::print.compare_column(did_id_check_work)
-
-	sink()
-
-    ## If move was successful delete folder from TEstCore
+    ## If valiData:::compare_column ran then try to move the files over to Desktop
     ## Otherwise give error in browser
-    if (!file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
+    if (inherits(did_id_check_work, "try-error")) {
     	cat(
-            sprintf(html_message , "PersonIdentifier_Report not run.<br>Contact...<br>"),
+            sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function."),
     	    file = file.path(desktop, "ERROR.html")
     	)
     	browseURL(file.path(desktop, "ERROR.html"))
-	    stop("Error occurred")
+    	stop("Error occurred")
+    } else {
+
+        ## actually makes the report
+    	sink(
+    		file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"),
+    		append = FALSE,
+    		split = TRUE
+    	)
+
+        valiData:::print.compare_column(did_id_check_work)
+
+    	sink()
+
+        ## If move was successful delete folder from TEstCore
+        ## Otherwise give error in browser
+        if (!file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
+        	cat(
+                sprintf(html_message , "PersonIdentifier_Report not run.<br>Contact...<br>"),
+        	    file = file.path(desktop, "ERROR.html")
+        	)
+        	browseURL(file.path(desktop, "ERROR.html"))
+    	    stop("Error occurred")
+        }
     }
+} else {
+
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", accts)
+    cat(comp, file = file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"))
+
 }
 
 
