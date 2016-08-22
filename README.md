@@ -4,6 +4,6 @@
 
 ```
 if (!require("pacman")) install.packages("pacman")
-pacman::p_install_gh(c("data-steve/valiData", 'trinker/validateMake'))
+pacman::p_install_current_gh(c("data-steve/valiData", 'trinker/validateMake'))
 validateMake::validate_make()
 ```
