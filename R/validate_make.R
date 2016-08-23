@@ -26,14 +26,14 @@ validate_make <- function(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/T
         button <- paste(
             c(
                 "@echo off", "if exist \"C:\\Users\\%username%\\OneDrive for Business\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
                 ")", "", "if exist \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\update.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
                 ")", "", "if exist \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\Products\\Data_Science\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
                 ")"
             ),
             collapse="\n"
@@ -44,10 +44,10 @@ validate_make <- function(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/T
         } else {
         button <- paste0('#! /bin/bash', '\n',
              'Rscript /Volumes/shared/swiper/CoreData/valiData_user_research/valiData_use.R  --no-save --no-restore',
-             " '", file.path(path,"update.R")," ", paste0('/Volumes/shared/Products/Data_Science/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
+             " '", file.path(path,"update.R")," ", paste0('/Volumes/shared/swiper/valiData/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
              '\n\n', ,
              'Rscript /Volumes/shared/swiper/CoreData/valiData_user_research/valiData_use.R  --no-save --no-restore',
-             " '", file.path(path,"validate.R"),  paste0('/Volumes/shared/Products/Data_Science/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
+             " '", file.path(path,"validate.R"),  paste0('/Volumes/shared/swiper/valiData/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
              '\n'
         )
 
