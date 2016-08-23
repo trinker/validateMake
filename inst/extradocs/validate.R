@@ -1,4 +1,4 @@
-#version: 1.11
+#version: 1.12
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive for Business/Desktop'))) {
@@ -93,7 +93,7 @@ if (inherits(did_it_work, "try-error")) {
 	)
 	browseURL(file.path(desktop, "ERROR.html"))
 
-    pers_dir <- file.path(l_drive_go("Products/Data_Science/Data_Valiadtion/Error_Data"), Sys.info()[['user']])
+    pers_dir <- file.path(l_drive_go("swiper/valiData/Data_Valiadtion/Error_Data"), Sys.info()[['user']])
     unlink(pers_dir, recursive = TRUE, force = TRUE)
     suppressWarnings(dir.create(pers_dir))
 
