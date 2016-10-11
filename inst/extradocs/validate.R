@@ -1,4 +1,4 @@
-#version: 1.13
+#version: 1.14
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
@@ -100,12 +100,12 @@ if (inherits(did_it_work, "try-error")) {
     print(did_it_work, as.report = TRUE, delete = TRUE)
 
     ## make VALIDATED_DATA folder on Desktop and move over folder from TestCore
-    dir.create(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA"))
-    file.copy(path, file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA"), recursive = TRUE)
+    dir.create(file.path(desktop, "VALIDATED_DATA"))
+    file.copy(path, file.path(desktop, "VALIDATED_DATA"), recursive = TRUE)
 
     ## If move was successful delete folder from TEstCore
     ## Otherwise give error in browser
-    if (file.exists(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA", basename(path)))) {
+    if (file.exists(file.path(desktop, "VALIDATED_DATA", basename(path)))) {
         unlink(path, recursive = TRUE, force = FALSE)
     } else {
     	cat(
@@ -198,7 +198,7 @@ if (acc_csvs_valid) {
 } else {
 
     comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", accts)
-    cat(comp, file = file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"))
+    cat(comp, file = file.path(desktop, "VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"))
 
 }
 
