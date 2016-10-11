@@ -4,12 +4,9 @@
 #'
 #' @param path TestCore path
 #' @export
-validate_make <- function(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore")){
-    if (.Platform$OS.type!="windows"){
-        path <- file.path(path.expand("~"),"Desktop/TestCore")
-    }
-    if (path == Sys.getenv("R_HOME"))
-        stop("path can not be `R_HOME`")
+validate_make <- function(path = file.path(validateMake::get_desktop(), "TestCore")){
+
+    if (path == Sys.getenv("R_HOME")) stop("path can not be `R_HOME`")
     if (file.exists(path)) {
         message(paste0("\"", path, "\" already exists:\nDo you want to overwrite?\n"))
         ans <- menu(c("Yes", "No"))

@@ -4,7 +4,7 @@
 \alias{validate_make}
 \title{Generate a validate program}
 \usage{
-validate_make(path = file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
+validate_make(path = file.path(validateMake::get_desktop(), "TestCore"))
 }
 \arguments{
 \item{path}{TestCore path}

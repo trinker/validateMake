@@ -1,19 +1,7 @@
-#version: 1.12
+#version: 1.13
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
-if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive for Business/Desktop'))) {
-    desktop <- 'OneDrive for Business/Desktop'
-} else {
-    if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'OneDrive - Campus Labs/Desktop'))) {
-        desktop <- 'OneDrive - Campus Labs/Desktop'
-    } else {
-        if (dir.exists(file.path(Sys.getenv("USERPROFILE"),'Desktop'))) {
-            desktop <- 'Desktop'
-        }
-    }
-}
-
-desktop <- file.path(Sys.getenv("USERPROFILE"), desktop)
+desktop <- validateMake::get_desktop()
 
 setwd(file.path(desktop, "TestCore"))
 
@@ -155,8 +143,8 @@ if(!Sys.info()[['user']] %in% c("trinker", "ssimpson")){
 
 ## Check that personID in child files is found in accounts
 ##   First ensure 'Accounts/AccountImports/xxx.csv' exists
-accts <- file.path(file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA", basename(path)), 'Accounts/AccountImports')
-acc_csvs_valid <- file.exists(accts) && length(dir(accts, pattern = ".csv$") > 0) 
+accts <- file.path(file.path(desktop, "VALIDATED_DATA", basename(path)), 'Accounts/AccountImports')
+acc_csvs_valid <- file.exists(accts) && length(dir(accts, pattern = ".csv$") > 0)
 dir(accts, pattern = ".csv$")  # left for debugging purposes
 file.exists(accts)             # left for debugging purposes
 if (acc_csvs_valid) {
@@ -165,7 +153,7 @@ if (acc_csvs_valid) {
     ## check personID against accounts.csv
     did_id_check_work <- try(
         valiData:::compare_column(
-		path = file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA", basename(path)),
+		path = file.path(desktop, "VALIDATED_DATA", basename(path)),
 		column='PersonIdentifier',
 		parent='AccountImports',
 		child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
@@ -187,7 +175,7 @@ if (acc_csvs_valid) {
 
         ## actually makes the report
     	sink(
-    		file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"),
+    		file.path(desktop, "VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"),
     		append = FALSE,
     		split = TRUE
     	)
@@ -198,7 +186,7 @@ if (acc_csvs_valid) {
 
         ## If move was successful delete folder from TEstCore
         ## Otherwise give error in browser
-        if (!file.path(Sys.getenv("USERPROFILE"), "Desktop/VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
+        if (!file.path(desktop, "VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
         	cat(
                 sprintf(html_message , "PersonIdentifier_Report not run.<br>Contact...<br>"),
         	    file = file.path(desktop, "ERROR.html")

@@ -1,4 +1,4 @@
-setwd(file.path(Sys.getenv("USERPROFILE"), "Desktop/TestCore"))
+setwd(file.path(validateMake::get_desktop(), "TestCore"))
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
