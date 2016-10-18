@@ -1,4 +1,4 @@
-#version: 1.15
+#version: 1.16
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
@@ -188,7 +188,7 @@ if (acc_csvs_valid) {
 
         ## If move was successful delete folder from TEstCore
         ## Otherwise give error in browser
-        if (!file.path(desktop, "VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt")) {
+        if (!file.exists(file.path(desktop, "VALIDATED_DATA/", basename(path), "`Reports/PersonIdentifier_Report.txt"))) {
         	cat(
                 sprintf(html_message , "PersonIdentifier_Report not run.<br>Contact...<br>"),
         	    file = file.path(desktop, "ERROR.html")
