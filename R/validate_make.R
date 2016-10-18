@@ -40,10 +40,10 @@ validate_make <- function(path = file.path(validateMake::get_desktop(), "TestCor
         cat(button, file=file.path(path, 'button.bat'))
         } else {
         button <- paste0('#! /bin/bash', '\n\nstty -echoctl\n\n',
-             'Rscript  --no-save --no-restore $HOME/Desktop/TestCore/update.R ',
+             'R CMD BATCH --no-save --no-restore $HOME/Desktop/TestCore/update.R ',
              " '", paste0('/Volumes/shared/swiper/valiData/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
              '\n\n',
-             'Rscript  --no-save --no-restore $HOME/Desktop/TestCore/validate.R ',
+             'R CMD BATCH --no-save --no-restore $HOME/Desktop/TestCore/validate.R ',
              " '",  paste0('/Volumes/shared/swiper/valiData/Data_Valiadtion/Validation_Outputs/',Sys.getenv("USER"),".Rout"),"'",
              '\n'
         )
