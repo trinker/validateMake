@@ -1,4 +1,4 @@
-#version: 1.14
+#version: 1.15
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
@@ -144,8 +144,8 @@ if(!Sys.info()[['user']] %in% c("trinker", "ssimpson")){
 ## Check that personID in child files is found in accounts
 ##   First ensure 'Accounts/AccountImports/xxx.csv' exists
 accts <- file.path(file.path(desktop, "VALIDATED_DATA", basename(path)), 'Accounts/AccountImports')
-acc_csvs_valid <- file.exists(accts) && length(dir(accts, pattern = ".csv$") > 0)
-dir(accts, pattern = ".csv$")  # left for debugging purposes
+acc_csvs_valid <- file.exists(accts) && length(dir(accts, pattern = ".csv$|.CSV$") > 0)
+dir(accts, pattern = ".csv$|.CSV$")  # left for debugging purposes
 file.exists(accts)             # left for debugging purposes
 if (acc_csvs_valid) {
 
