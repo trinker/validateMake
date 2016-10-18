@@ -30,6 +30,8 @@ if (!valiData_available) {
 ## Check to make sure only one folder is in TestCore
 path <- list.dirs(recursive = FALSE)
 
+path
+
 if (length(path) > 1) {
 	cat(
          sprintf(html_message , "More than one directory located in 'TestCore'.<br>Remove additional file.<br><br>If that doesn't work...<br>"),
