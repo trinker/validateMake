@@ -20,21 +20,21 @@ validate_make <- function(path = file.path(validateMake::get_desktop(), "TestCor
     suppressWarnings(invisible(dir.create(path, recursive = TRUE)))
     if (.Platform$OS.type=="windows"){
 
-        button <- paste(
-            c(
-                "@echo off", "if exist \"C:\\Users\\%username%\\OneDrive for Business\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                ")", "", "if exist \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                ")", "", "if exist \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" (",
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Validation\\Validation_Outputs\\%username%.Rout\""),
-                ")"
-            ),
-            collapse="\n"
-        )
+      button <- paste(
+        c(
+          "@echo off", "if exist \"C:\\Users\\%username%\\OneDrive for Business\\Desktop\\TestCore\\validate.R\" (",
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          ") ELSE if exist \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" (",
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\OneDrive - Campus Labs\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          ") ELSE if exist \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" (",
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\update.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          paste(shQuote(file.path(R.home(), "bin", "R")), "CMD BATCH --no-save --no-restore \"C:\\Users\\%username%\\Desktop\\TestCore\\validate.R\" \"L:\\swiper\\valiData\\Data_Valiadtion\\Validation_Outputs\\%username%.Rout\""),
+          ")"
+        ),
+        collapse="\n"
+      )
 
         # make button.bat
         cat(button, file=file.path(path, 'button.bat'))
