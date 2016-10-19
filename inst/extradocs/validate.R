@@ -72,7 +72,7 @@ map <- import_map(map_loc)
 
 
 ## Run valiData and produce reports
-did_it_work <- try(valiData::valiData(path, map))
+did_it_work <- try(valiData(path, map))
 
 ## If valiData ran then try to move the files over to Desktop
 ## Otherwise give error in browser
