@@ -1,4 +1,4 @@
-#version: 1.17
+#version: 1.18
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
@@ -8,8 +8,14 @@ setwd(file.path(desktop, "TestCore"))
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
+if (!require("dplyr")) install.packages("dplyr")
+if (!require("tibble")) install.packages("tibble")
+if (!require("data.table")) install.packages("data.table")
+
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("data-steve/valiData")
+
+
 
 check_gf <- require('googleformr')
 if (!check_gf) install.packages('googleformr'); check_gf <- require('googleformr')
