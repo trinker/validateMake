@@ -1,5 +1,5 @@
-#version: 1.18
-html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Steve -n- Tyler.</p><br><br><br><br><br><br><img src=\"http://cbsmix1041.files.wordpress.com/2012/07/steven-tyler.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
+#version: 1.19
+html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science.</p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
 
@@ -13,7 +13,7 @@ if (!require("tibble")) install.packages("tibble")
 if (!require("data.table")) install.packages("data.table")
 
 if (!require("devtools")) install.packages("devtools")
-devtools::install_github("data-steve/valiData")
+devtools::install_github("trinker/valiData")
 
 
 
@@ -36,6 +36,8 @@ if (!valiData_available) {
 ## Check to make sure only one folder is in TestCore
 path <- list.dirs(recursive = FALSE)
 
+
+## print path for diagnostic purposes
 path
 
 if (length(path) > 1) {
