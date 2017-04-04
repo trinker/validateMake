@@ -1,12 +1,19 @@
-This app is a validator program for validating data inputs against a Campus Labs core data dictionary of expected file and variable types.
+# Version: 002
+
+This app is a validator program for validating data inputs against a Campus Labs Core Data Dictionary (CDD) of expected file and variable types.
 
 
 Usage:
 
-1. Move an institution core data file inside of 'Desktop/TestCore'
+1. Move an institution core data file inside of 'TestCore' directory
 2. Click 'button.bat' (may appear as just 'button')
 
 
 Output:
 
-The institution core data file will be moved to 'Desktop/VALIDATED_DATA/INSTITUTION_NAME_HERE' with a '`Reports' file inside that contains the validation report for that institution.  A second validation file, 'PersonIdentifier_Report.txt' will also be located in '`Reports' and has info on the 'personID' comparisons against the '`'Accounts/AccountImports/xxx.cxv' file.
+The institution core data file will now contain a '`Reports' file inside which houses:
+
+- `valiData_report.txt`
+- `Cross_File_Comparisons_Report.txt`
+
+The first one checks that each file meets the schema expectations from the CDD.  The second file ensures cross file expectations are met.  For example, it ensures that if a `CourseIdentifier` is found in the file 'Courses/Section/xxx.csv' then these elements must also be found in the parent 'Courses/Course/xxx.csv'.
