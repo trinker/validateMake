@@ -1,4 +1,4 @@
-#version: 1.19
+#version: 1.20
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science.</p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 desktop <- validateMake::get_desktop()
@@ -8,6 +8,7 @@ setwd(file.path(desktop, "TestCore"))
 
 ## Install clean valiData
 options(repos="http://cran.rstudio.com/")
+if (!require("hms")) install.packages("hms")
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("tibble")) install.packages("tibble")
 if (!require("data.table")) install.packages("data.table")
