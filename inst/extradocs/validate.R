@@ -1,4 +1,4 @@
-#version: 1.23
+#version: 1.24
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -15,6 +15,7 @@ map_loc <- 'bin/Core_Data_Dictionary_DS_longforms.xlsx'
 # Install dependencies
 #=====================
 options(repos="http://cran.rstudio.com/")
+if (!require("cellranger")) install.packages("cellranger")
 if (!require("hms")) install.packages("hms")
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("tibble")) install.packages("tibble")
