@@ -1,4 +1,4 @@
-#version: 1.24
+#version: 1.25
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -274,7 +274,7 @@ if (isTRUE(org_csvs_valid)) {
 ## Check that CourseIdentifier in child files is found in parent Courses/Course
 ##=============================================================================
 ## First ensure 'Courses/Course/xxx.csv' exists
-courseid <- file.path(basename(path), 'Courses/OrgUnit')
+courseid <- file.path(basename(path), 'Courses/Course')
 course_csv_valid <- file.exists(courseid) && length(dir(courseid, pattern = ".csv$|.CSV$") > 0)
 dir(courseid, pattern = ".csv$|.CSV$"); file.exists(courseid)
 
