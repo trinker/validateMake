@@ -12,4 +12,3 @@ validate_make(path = file.path(validateMake::get_desktop(), "TestCore"))
 \description{
 Generate a validate program
 }
-

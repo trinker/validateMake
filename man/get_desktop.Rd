@@ -15,4 +15,3 @@ Find the path to a viable CL user's desktop.
 \examples{
 get_desktop()
 }
-
