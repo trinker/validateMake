@@ -1,4 +1,4 @@
-#version: 1.27
+#version: 1.28
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -112,6 +112,7 @@ did_id_check_work4 <- NULL
 did_id_check_work5 <- NULL
 did_id_check_work6 <- NULL
 did_id_check_work7 <- NULL
+did_id_check_work8 <- NULL
 
 ##========================================================
 ## Check that personID in child files is found in accounts
@@ -619,6 +620,93 @@ if (isTRUE(term_csvs_valid)) {
 
 
 
+##======================================================================
+## Check that OrgUnit/ParentIdenitifer in child files is found in parent OrgUnit/OrgUnit
+##======================================================================
+## First ensure 'Section/TermIdentifier/xxx.csv' exists
+orgident<- file.path(basename(path), 'Courses/OrgUnit')
+org_csvs_valid <- file.exists(termident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
+dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
+
+if (isTRUE(term_csvs_valid)) {
+
+    ## check personID against accounts.csv
+    did_id_check_work8 <- try(
+        valiData:::compare_column(
+        path = basename(path),
+        parent.column='OrgUnitIdentifier',
+        parent='OrgUnit',
+        child = c('OrgUnit'),
+        child.column = 'ParentIdentifier',
+        ignore.case = TRUE
+        )
+    )
+
+    ## If valiData:::compare_column ran then add reporting
+    ## Otherwise give error in browser
+    if (inherits(did_id_check_work8, "try-error")) {
+
+        cat(
+            sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `OrgUnitIdentifier`)."),
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
+
+    } else {
+
+        if (file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
+            n_cfcr <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
+        } else {
+            n_cfcr <- 0
+        }
+
+
+        ## actually makes the report
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid) | isTRUE(sect_csvs_valid) | isTRUE(term_csvs_valid),
+            split = TRUE
+          )
+        if(!is.null(did_id_check_work8$call) && did_id_check_work8$call == "vt_duplicated_rows"){
+            print(did_id_check_work8)
+        } else {
+            valiData:::print.compare_column(did_id_check_work8)
+        }
+          sink()
+
+        ## Check if addition was successful
+        ## Otherwise give error in browser
+        if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
+
+            cat(
+                sprintf(html_message , "Cross_File_Comparisons_Report not run for `AcademicTerm/TermIdentifier`.<br><br>"),
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
+
+        }
+        n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
+        if (length(did_id_check_work8$validated) > 0 && n_cfcr2 <= n_cfcr) {
+
+            cat(
+                sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/OrgUnitIdentifier`.<br><br>"),
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
+
+        }
+    }
+
+} else {
+
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match OrgUnitIdentifiers against:\n", orgident)
+    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+
+}
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -697,6 +785,8 @@ if (inherits(did_id_check_work4, 'try-error') || is.null(did_id_check_work4)) di
 if (inherits(did_id_check_work5, 'try-error') || is.null(did_id_check_work5)) did_id_check_work5 <- list(NULL, NULL)
 if (inherits(did_id_check_work6, 'try-error') || is.null(did_id_check_work6)) did_id_check_work6 <- list(NULL, NULL)
 if (inherits(did_id_check_work7, 'try-error') || is.null(did_id_check_work7)) did_id_check_work7 <- list(NULL, NULL)
+if (inherits(did_id_check_work8, 'try-error') || is.null(did_id_check_work8)) did_id_check_work8 <- list(NULL, NULL)
+
 
 check_dupes <- function(x){
 
@@ -718,6 +808,7 @@ did_id_check_work4 <- check_dupes(did_id_check_work4)
 did_id_check_work5 <- check_dupes(did_id_check_work5)
 did_id_check_work6 <- check_dupes(did_id_check_work6)
 did_id_check_work7 <- check_dupes(did_id_check_work7)
+did_id_check_work8 <- check_dupes(did_id_check_work8)
 
 
 cross_file <- unlist(list(
@@ -726,7 +817,8 @@ cross_file <- unlist(list(
     setNames(lapply(did_id_check_work4[[2]], function(x) x$message), unlist(lapply(did_id_check_work4[[1]], get_file))),
     setNames(lapply(did_id_check_work5[[2]], function(x) x$message), unlist(lapply(did_id_check_work5[[1]], get_file))),
     setNames(lapply(did_id_check_work6[[2]], function(x) x$message), unlist(lapply(did_id_check_work6[[1]], get_file))),
-    setNames(lapply(did_id_check_work7[[2]], function(x) x$message), unlist(lapply(did_id_check_work7[[1]], get_file)))
+    setNames(lapply(did_id_check_work7[[2]], function(x) x$message), unlist(lapply(did_id_check_work7[[1]], get_file))),
+    setNames(lapply(did_id_check_work8[[2]], function(x) x$message), unlist(lapply(did_id_check_work8[[1]], get_file)))
 ), recursive = FALSE)
 
 cross_file <- lapply(cross_file[!sapply(cross_file, is.null)], function(x) gsub('\\s+', ' ', x))
