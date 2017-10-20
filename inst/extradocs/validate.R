@@ -1,4 +1,4 @@
-#version: 1.29
+#version: 1.30
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -15,6 +15,8 @@ map_loc <- 'bin/Core_Data_Dictionary_DS_longforms.xlsx'
 # Install dependencies
 #=====================
 options(repos="http://cran.rstudio.com/")
+if (!require("DiagrammeR")) install.packages("DiagrammeR")
+if (!require("data.tree")) install.packages("data.tree", type = 'binary')
 if (!require("cellranger")) install.packages("cellranger")
 if (!require("hms")) install.packages("hms")
 if (!require("dplyr")) install.packages("dplyr")
@@ -22,6 +24,7 @@ if (!require("tibble")) install.packages("tibble")
 if (!require("data.table")) install.packages("data.table")
 if (!require("devtools")) install.packages("devtools")
 if (!require("readr")) install.packages("readr")
+if (!require("textshape")) install.packages("textshape")
 devtools::install_github("trinker/valiData")
 
 ## Check if valiData is installed
@@ -861,13 +864,104 @@ if (!file.exists(file.path(basename(path), "`Reports/Email_Summary.txt"))) {
 }
 
 
+##=====================
+## Print Org Unit Chart
+##=====================
+## First ensure 'Courses/OrgUnit/xxx.csv' exists
+orgident <- file.path(basename(path), 'Courses/OrgUnit')
+org_csvs_valid <- file.exists(termident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
+dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
+
+filter_all_na <- function(dat) {
+  dat %>% filter(Reduce(`+`, lapply(., is.na)) != ncol(.))
+}
+
+## if else prints org tree or no valid csv
+if (isTRUE(term_csvs_valid)) {
+
+    org <- readr::read_csv(dir(orgident, pattern = ".csv$|.CSV$", full.names = TRUE)) %>%
+        stats::setNames(tolower(names(.)))
+
+    colnames_exist <- all(c("orgunitidentifier", "name", "parentidentifier") %in% colnames(org))
+
+    if (colnames_exist) {
+
+        org <- filter_all_na(org[c("orgunitidentifier", "name", "parentidentifier")])
+
+        nas <- sum(is.na(org[['parentidentifier']]))
+
+        if (nas == 1) {
+
+            key <- org %>%
+                dplyr::select(orgunitidentifier, name) %>%
+                stats::setNames(c('id', 'name'))
+
+            key2 <- org %>%
+                dplyr::select(orgunitidentifier, parentidentifier)
 
 
+            struct <- apply(key2, 1, function(x){
+
+                if (is.na(x[['parentidentifier']])) return(x[['orgunitidentifier']])
+                par <- x[['parentidentifier']]
+                path <- unlist(x)
+                i <- length(path) + 1
+                while(!is.na(par)){
+
+                    path[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
+                    par <- path[i]
+                    i <- i + 1
+              
+                }
+
+                return(rev(c(stats::na.omit(unname(path)))))
+            })
 
 
+            tree <- struct  %>%
+                textshape::tidy_list('org', 'path') %>%
+                dplyr::left_join(key, by = c('path' = 'id')) %>%
+                dplyr::group_by(org) %>%
+                dplyr::summarize(pathString = paste(unlist(name), collapse = '/')) %>%
+                data.tree::as.Node()
+
+            ptree <- gsub("\\G\\d", ' ', capture.output(print(tree, limit = NULL)), perl = TRUE)[-1]
+            rep <- paste('^', gsub('(^\\s+)(\\s\\S.+$)', '\\1', ptree[1]))
+
+            cat(paste0(
+                valiData:::header('Org Chart', char = "="),
+                paste(
+                    gsub(rep, '', ptree), 
+                    collapse = '\n')), '\n', 
+                file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt")
+            )
+
+        } else {
+
+            end <- ifelse(
+                nas == 0, 
+                "' does not contain a single empty value.", 
+                "' contains multiple empty values.\nShould only be one empty for the top of the org chart."
+            )
+            comp <- paste0("The CSV file in '", orgident, end)
+            cat(comp, '\n', file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt"))
+
+        }
+
+    } else {
+
+        comp <- paste0("The CSV file in '", orgident, "' does not have the correct column headers; no org chart made")
+        cat(comp, '\n', file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt"))
 
 
+    }
 
+} else {
+
+    comp <- paste0("Could not find a single valid .csv file in  the following location to produce an org chart:\n", orgident)
+    cat(comp, '\n', file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt"))
+
+}
 
 
 
