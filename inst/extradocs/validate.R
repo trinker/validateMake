@@ -1,4 +1,4 @@
-#version: 1.30
+#version: 1.31
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -31,12 +31,12 @@ devtools::install_github("trinker/valiData")
 valiData_available <- require('valiData')
 
 if (!valiData_available) {
-	cat(
+    cat(
          sprintf(html_message , "`valiData` not installed."),
-	     file = file.path(error_loc, "ERROR.html")
-	)
-	browseURL(file.path(error_loc, "ERROR.html"))
-	stop("Error occurred")
+         file = file.path(error_loc, "ERROR.html")
+    )
+    browseURL(file.path(error_loc, "ERROR.html"))
+    stop("Error occurred")
 }
 
 
@@ -49,22 +49,22 @@ if (!valiData_available) {
 path <- grep("(VALIDATED_DATA)|(\\./bin)", list.dirs(recursive = FALSE), invert=TRUE, value=TRUE); path
 
 if (length(path) > 1) {
-	cat(
+    cat(
          sprintf(html_message , "More than one directory located in 'TestCore'.<br>Remove additional file.<br><br>If that doesn't work...<br>"),
-	     file = file.path(error_loc, "ERROR.html")
-	)
-	browseURL(file.path(error_loc, "ERROR.html"))
-	stop("Error occurred")
+         file = file.path(error_loc, "ERROR.html")
+    )
+    browseURL(file.path(error_loc, "ERROR.html"))
+    stop("Error occurred")
 }
 
 ## Check to make sure a folder is in TestCore
 if (length(path) == 0) {
-	cat(
+    cat(
          sprintf(html_message , "It appears there is no test directory located in 'TestCore'.<br>Put a file in TestCore.<br><br>If that doesn't work...<br>"),
-	     file = file.path(error_loc, "ERROR.html")
-	)
-	browseURL(file.path(error_loc, "ERROR.html"))
-	stop("Error occurred")
+         file = file.path(error_loc, "ERROR.html")
+    )
+    browseURL(file.path(error_loc, "ERROR.html"))
+    stop("Error occurred")
 }
 
 
@@ -86,13 +86,13 @@ did_it_work1 <- try(valiData::valiData(path, map))
 
 ## Check if valiData ran otherwise give error in browser
 if (inherits(did_it_work1, "try-error")) {
-	cat(
+    cat(
         sprintf(html_message , "Some sort of error occurred in `valiData` function."),
-	    file = file.path(error_loc, "ERROR.html")
-	)
-	browseURL(file.path(error_loc, "ERROR.html"))
+        file = file.path(error_loc, "ERROR.html")
+    )
+    browseURL(file.path(error_loc, "ERROR.html"))
 
-	stop("Error occurred")
+    stop("Error occurred")
 
 } else {
 
@@ -130,11 +130,11 @@ if (isTRUE(acc_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work2 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='PersonIdentifier',
-		parent='AccountImports',
-		child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
-		ignore.case = TRUE
+        path = basename(path),
+        parent.column='PersonIdentifier',
+        parent='AccountImports',
+        child = c('Enrollment', 'FacultyRemoval', 'Instructor', 'FacultyImport', 'StudentImport'),
+        ignore.case = TRUE
         )
     )
 
@@ -144,36 +144,36 @@ if (isTRUE(acc_csvs_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `PersonIdentifier`)."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = FALSE,
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = FALSE,
+            split = TRUE
+          )
         if(!is.null(did_id_check_work2$call) && did_id_check_work2$call == "vt_duplicated_rows"){
             print(did_id_check_work2)
         } else {
             valiData:::print.compare_column(did_id_check_work2)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -201,11 +201,11 @@ if (isTRUE(org_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work3 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='OrgUnitIdentifier',
-		parent='OrgUnit',
-		child = c('Course', 'Section'),
-		ignore.case = TRUE
+        path = basename(path),
+        parent.column='OrgUnitIdentifier',
+        parent='OrgUnit',
+        child = c('Course', 'Section'),
+        ignore.case = TRUE
         )
     )
 
@@ -215,10 +215,10 @@ if (isTRUE(org_csvs_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `OrgUnitIdentifier`)."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
@@ -230,40 +230,40 @@ if (isTRUE(org_csvs_valid)) {
 
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = isTRUE(acc_csvs_valid),
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid),
+            split = TRUE
+          )
 
         if(!is.null(did_id_check_work3$call) && did_id_check_work3$call == "vt_duplicated_rows"){
             print(did_id_check_work3)
         } else {
             valiData:::print.compare_column(did_id_check_work3)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Course/OrgUnitID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
         n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
         if (length(did_id_check_work3$validated) > 0 && n_cfcr2 <= n_cfcr) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/OrgUnit$OrgUnitID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -290,11 +290,11 @@ if (isTRUE(course_csv_valid)) {
     ## check personID against accounts.csv
     did_id_check_work4 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='CourseIdentifier',
-		parent='Course',
-		child = c('Section'),
-		ignore.case = TRUE
+        path = basename(path),
+        parent.column='CourseIdentifier',
+        parent='Course',
+        child = c('Section'),
+        ignore.case = TRUE
         )
     )
 
@@ -304,10 +304,10 @@ if (isTRUE(course_csv_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `OrgUnitIdentifier`)."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
@@ -319,39 +319,39 @@ if (isTRUE(course_csv_valid)) {
 
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid),
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid),
+            split = TRUE
+          )
         if(!is.null(did_id_check_work4$call) && did_id_check_work4$call == "vt_duplicated_rows"){
             print(did_id_check_work4)
         } else {
             valiData:::print.compare_column(did_id_check_work4)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Course/OrgUnitID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
         n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
         if (length(did_id_check_work4$validated) > 0 && n_cfcr2 <= n_cfcr) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/OrgUnit$OrgUnitID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -378,12 +378,12 @@ if (isTRUE(sect_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work5 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='SectionIdentifier',
+        path = basename(path),
+        parent.column='SectionIdentifier',
             child.column = 'Identifier',
-		parent='Section',
-		child = c('SectionAttribute'),
-		ignore.case = TRUE
+        parent='Section',
+        child = c('SectionAttribute'),
+        ignore.case = TRUE
         )
     )
 
@@ -393,10 +393,10 @@ if (isTRUE(sect_csvs_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `SectionIdentifier` (round 1))."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
@@ -408,39 +408,39 @@ if (isTRUE(sect_csvs_valid)) {
 
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid),
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid),
+            split = TRUE
+          )
         if(!is.null(did_id_check_work5$call) && did_id_check_work5$call == "vt_duplicated_rows"){
             print(did_id_check_work5)
         } else {
             valiData:::print.compare_column(did_id_check_work5)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Course/OrgUnitID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
         n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
         if (length(did_id_check_work5$validated) > 0 && n_cfcr2 <= n_cfcr) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/Section$SectionID (round 1)`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -462,11 +462,11 @@ if (isTRUE(sect_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work6 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='SectionIdentifier',
-		parent='Section',
-		child = c('Instructor', 'Enrollment'),
-		ignore.case = TRUE
+        path = basename(path),
+        parent.column='SectionIdentifier',
+        parent='Section',
+        child = c('Instructor', 'Enrollment'),
+        ignore.case = TRUE
         )
     )
 
@@ -476,10 +476,10 @@ if (isTRUE(sect_csvs_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking `SectionIdentifier` (round 2))."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
@@ -491,39 +491,39 @@ if (isTRUE(sect_csvs_valid)) {
 
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid) | isTRUE(sect_csvs_valid),
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid) | isTRUE(sect_csvs_valid),
+            split = TRUE
+          )
         if(!is.null(did_id_check_work6$call) && did_id_check_work6$call == "vt_duplicated_rows"){
             print(did_id_check_work6)
         } else {
             valiData:::print.compare_column(did_id_check_work6)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/Section$SectionID (round 2)`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
         n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
         if (length(did_id_check_work6$validated) > 0 && n_cfcr2 <= n_cfcr) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `Courses/Section$SectionID`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -549,11 +549,11 @@ if (isTRUE(term_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work7 <- try(
         valiData:::compare_column(
-		path = basename(path),
-		parent.column='TermIdentifier',
-		parent='AcademicTerm',
-		child = c('Section'),
-		ignore.case = TRUE
+        path = basename(path),
+        parent.column='TermIdentifier',
+        parent='AcademicTerm',
+        child = c('Section'),
+        ignore.case = TRUE
         )
     )
 
@@ -563,10 +563,10 @@ if (isTRUE(term_csvs_valid)) {
 
         cat(
             sprintf(html_message , "Some sort of error occurred in `valiData:::compare_column` function (when checking TermIdentifier`)."),
-    	      file = file.path(error_loc, "ERROR.html")
-    	  )
-    	  browseURL(file.path(error_loc, "ERROR.html"))
-     	  stop("Error occurred")
+              file = file.path(error_loc, "ERROR.html")
+          )
+          browseURL(file.path(error_loc, "ERROR.html"))
+          stop("Error occurred")
 
     } else {
 
@@ -578,39 +578,39 @@ if (isTRUE(term_csvs_valid)) {
 
 
         ## actually makes the report
-    	  sink(
-    		file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
-    		append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid) | isTRUE(sect_csvs_valid),
-    		split = TRUE
-    	  )
+          sink(
+            file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+            append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid) | isTRUE(course_csv_valid) | isTRUE(sect_csvs_valid),
+            split = TRUE
+          )
         if(!is.null(did_id_check_work7$call) && did_id_check_work7$call == "vt_duplicated_rows"){
             print(did_id_check_work7)
         } else {
             valiData:::print.compare_column(did_id_check_work7)
         }
-    	  sink()
+          sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
         if (!file.exists(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `AcademicTerm/TermIdentifier`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
         n_cfcr2 <- length(readLines(file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt")))
         if (length(did_id_check_work7$validated) > 0 && n_cfcr2 <= n_cfcr) {
 
-        	cat(
+            cat(
                 sprintf(html_message , "Cross_File_Comparisons_Report not run for `AcademicTerm/TermIdentifier`.<br><br>"),
-        	    file = file.path(error_loc, "ERROR.html")
-        	)
-        	browseURL(file.path(error_loc, "ERROR.html"))
-    	      stop("Error occurred")
+                file = file.path(error_loc, "ERROR.html")
+            )
+            browseURL(file.path(error_loc, "ERROR.html"))
+              stop("Error occurred")
 
         }
     }
@@ -735,7 +735,7 @@ did_it_work1$dir_lev
 ## file level info
 ##----------------
 files <- lapply(did_it_work1$per_file, function(x) {
-	get_file(x[[1]])
+    get_file(x[[1]])
 })
 
 file_info <- setNames(as.list(rep(NA, length(files))), files)
@@ -853,13 +853,13 @@ sink()
 
 ## Check if email report ran otherwise give error in browser
 if (!file.exists(file.path(basename(path), "`Reports/Email_Summary.txt"))) {
-	cat(
+    cat(
         sprintf(html_message, "The `Email_Summary.txt` report does not appear to have been generated."),
-	    file = file.path(error_loc, "ERROR.html")
-	)
-	browseURL(file.path(error_loc, "ERROR.html"))
+        file = file.path(error_loc, "ERROR.html")
+    )
+    browseURL(file.path(error_loc, "ERROR.html"))
 
-	stop("Error occurred")
+    stop("Error occurred")
 
 }
 
@@ -923,6 +923,7 @@ if (isTRUE(term_csvs_valid)) {
                 dplyr::left_join(key, by = c('path' = 'id')) %>%
                 dplyr::group_by(org) %>%
                 dplyr::summarize(pathString = paste(unlist(name), collapse = '/')) %>%
+                dplyr::arrange(pathString) %>%
                 data.tree::as.Node()
 
             ptree <- gsub("\\G\\d", ' ', capture.output(print(tree, limit = NULL)), perl = TRUE)[-1]
