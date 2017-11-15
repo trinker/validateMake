@@ -1,4 +1,4 @@
-#version: 1.31
+#version: 1.32
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -921,10 +921,9 @@ if (isTRUE(term_csvs_valid)) {
             tree <- struct  %>%
                 textshape::tidy_list('org', 'path') %>%
                 dplyr::left_join(key, by = c('path' = 'id')) %>%
-                dplyr::group_by(org) %>%
-                dplyr::summarize(pathString = paste(unlist(name), collapse = '/')) %>%
+                dplyr::summarize(pathString = paste(unlist(name), collapse = '<<>>')) %>%
                 dplyr::arrange(pathString) %>%
-                data.tree::as.Node()
+                data.tree::as.Node(pathDelimiter = '<<>>')
 
             ptree <- gsub("\\G\\d", ' ', capture.output(print(tree, limit = NULL)), perl = TRUE)[-1]
             rep <- paste('^', gsub('(^\\s+)(\\s\\S.+$)', '\\1', ptree[1]))
