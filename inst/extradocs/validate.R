@@ -1,4 +1,4 @@
-#version: 1.32
+#version: 1.33
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -869,7 +869,7 @@ if (!file.exists(file.path(basename(path), "`Reports/Email_Summary.txt"))) {
 ##=====================
 ## First ensure 'Courses/OrgUnit/xxx.csv' exists
 orgident <- file.path(basename(path), 'Courses/OrgUnit')
-org_csvs_valid <- file.exists(termident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
+org_csvs_valid <- file.exists(orgident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
 dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
 
 filter_all_na <- function(dat) {
@@ -877,7 +877,7 @@ filter_all_na <- function(dat) {
 }
 
 ## if else prints org tree or no valid csv
-if (isTRUE(term_csvs_valid)) {
+if (isTRUE(org_csvs_valid)) {
 
     org <- readr::read_csv(dir(orgident, pattern = ".csv$|.CSV$", full.names = TRUE)) %>%
         stats::setNames(tolower(names(.)))
@@ -921,6 +921,7 @@ if (isTRUE(term_csvs_valid)) {
             tree <- struct  %>%
                 textshape::tidy_list('org', 'path') %>%
                 dplyr::left_join(key, by = c('path' = 'id')) %>%
+                dplyr::group_by(org) %>%
                 dplyr::summarize(pathString = paste(unlist(name), collapse = '<<>>')) %>%
                 dplyr::arrange(pathString) %>%
                 data.tree::as.Node(pathDelimiter = '<<>>')
