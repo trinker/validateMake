@@ -1,4 +1,4 @@
-#version: 1.34
+#version: 1.35
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -201,11 +201,12 @@ if (isTRUE(org_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work3 <- try(
         valiData:::compare_column(
-        path = basename(path),
-        parent.column='OrgUnitIdentifier',
-        parent='OrgUnit',
-        child = c('Course', 'Section'),
-        ignore.case = TRUE
+            path = basename(path),
+            parent.column='OrgUnitIdentifier',
+            parent='OrgUnit',
+            child = c('Course', 'Section'),
+            ignore.case = TRUE,
+            ignore.element.case = TRUE
         )
     )
 
@@ -637,12 +638,13 @@ if (isTRUE(term_csvs_valid)) {
     ## check personID against accounts.csv
     did_id_check_work8 <- try(
         valiData:::compare_column(
-        path = basename(path),
-        parent.column='OrgUnitIdentifier',
-        parent='OrgUnit',
-        child = c('OrgUnit'),
-        child.column = 'ParentIdentifier',
-        ignore.case = TRUE
+            path = basename(path),
+            parent.column='OrgUnitIdentifier',
+            parent='OrgUnit',
+            child = c('OrgUnit'),
+            child.column = 'ParentIdentifier',
+            ignore.case = TRUE,
+            ignore.element.case = TRUE
         )
     )
 
@@ -915,7 +917,7 @@ if (isTRUE(org_csvs_valid)) {
                     path[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
                     par <- path[i]
                     i <- i + 1
-              
+
                 }
 
                 return(rev(c(stats::na.omit(unname(path)))))
@@ -936,16 +938,16 @@ if (isTRUE(org_csvs_valid)) {
             cat(paste0(
                 valiData:::header('Org Chart', char = "="),
                 paste(
-                    gsub(rep, '', ptree), 
-                    collapse = '\n')), '\n', 
+                    gsub(rep, '', ptree),
+                    collapse = '\n')), '\n',
                 file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt")
             )
 
         } else {
 
             end <- ifelse(
-                nas == 0, 
-                "' does not contain a single empty value.", 
+                nas == 0,
+                "' does not contain a single empty value.",
                 "' contains multiple empty values.\nShould only be one empty for the top of the org chart."
             )
             comp <- paste0("The CSV file in '", orgident, end)
