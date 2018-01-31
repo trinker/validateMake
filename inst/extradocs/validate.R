@@ -1,4 +1,4 @@
-#version: 1.35
+#version: 1.36
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -905,24 +905,36 @@ if (isTRUE(org_csvs_valid)) {
             key2 <- org %>%
                 dplyr::select(orgunitidentifier, parentidentifier)
 
-
             struct <- apply(key2, 1, function(x){
 
                 if (is.na(x[['parentidentifier']])) return(x[['orgunitidentifier']])
                 par <- x[['parentidentifier']]
-                path <- unlist(x)
-                i <- length(path) + 1
-                while(!is.na(par)){
+                path2 <- unlist(x)
+                i <- length(path2) + 1
 
-                    path[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
-                    par <- path[i]
+
+                while(!is.na(par) | i < 500){
+
+                    ## ensure that all the org branches connect
+                    if (i == 500) {
+                        cat('Orphaned Organizational Units Found in Org Chart', '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt"))
+                        break
+                    }
+
+                    path2[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
+                    par <- path2[i]
                     i <- i + 1
 
                 }
 
-                return(rev(c(stats::na.omit(unname(path)))))
+                if (i >= 500) {
+                    return(NULL)
+                }
+
+                return(rev(c(stats::na.omit(unname(path2)))))
             })
 
+            if (length(unlist(struct)) != length(struct)) stop()
 
             tree <- struct  %>%
                 textshape::tidy_list('org', 'path') %>%
