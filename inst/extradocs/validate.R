@@ -1,4 +1,4 @@
-#version: 1.36
+#version: 1.37
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -205,7 +205,7 @@ if (isTRUE(org_csvs_valid)) {
             parent.column='OrgUnitIdentifier',
             parent='OrgUnit',
             child = c('Course', 'Section'),
-            ignore.case = TRUE,
+            ignore.case = TRUE, 
             ignore.element.case = TRUE
         )
     )
@@ -643,7 +643,7 @@ if (isTRUE(term_csvs_valid)) {
             parent='OrgUnit',
             child = c('OrgUnit'),
             child.column = 'ParentIdentifier',
-            ignore.case = TRUE,
+            ignore.case = TRUE, 
             ignore.element.case = TRUE
         )
     )
@@ -912,8 +912,8 @@ if (isTRUE(org_csvs_valid)) {
                 path2 <- unlist(x)
                 i <- length(path2) + 1
 
-
-                while(!is.na(par) | i < 500){
+    
+                while(!is.na(par) | i < 501){
 
                     ## ensure that all the org branches connect
                     if (i == 500) {
@@ -924,7 +924,7 @@ if (isTRUE(org_csvs_valid)) {
                     path2[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
                     par <- path2[i]
                     i <- i + 1
-
+              
                 }
 
                 if (i >= 500) {
@@ -934,7 +934,9 @@ if (isTRUE(org_csvs_valid)) {
                 return(rev(c(stats::na.omit(unname(path2)))))
             })
 
-            if (length(unlist(struct)) != length(struct)) stop()
+            if (length(unlist(struct)) != length(struct)) {
+                stop("Orphaned Organizational Units Found in Org Chart")
+            }
 
             tree <- struct  %>%
                 textshape::tidy_list('org', 'path') %>%
@@ -950,16 +952,16 @@ if (isTRUE(org_csvs_valid)) {
             cat(paste0(
                 valiData:::header('Org Chart', char = "="),
                 paste(
-                    gsub(rep, '', ptree),
-                    collapse = '\n')), '\n',
+                    gsub(rep, '', ptree), 
+                    collapse = '\n')), '\n', 
                 file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt")
             )
 
         } else {
 
             end <- ifelse(
-                nas == 0,
-                "' does not contain a single empty value.",
+                nas == 0, 
+                "' does not contain a single empty value.", 
                 "' contains multiple empty values.\nShould only be one empty for the top of the org chart."
             )
             comp <- paste0("The CSV file in '", orgident, end)
@@ -983,7 +985,7 @@ if (isTRUE(org_csvs_valid)) {
 }
 
 
-
+print('finished')
 
 
 
