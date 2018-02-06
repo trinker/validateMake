@@ -1,4 +1,4 @@
-#version: 1.39
+#version: 1.40
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -977,7 +977,7 @@ if (isTRUE(org_csvs_valid)) {
             if (sum(non_recurse_locs) > 0 ) {
                 cat(paste0(
                     'Can\'t recurse the tree in some locations.\n\nOrphaned Organizational Units Found in Org Chart at:\n',
-                    paste(which(non_recurse_locs), collapse = ', ')
+                    paste(which(non_recurse_locs) + 1, collapse = ', ')
                     ),
                     '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt")
                 )
