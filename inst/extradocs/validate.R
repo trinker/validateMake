@@ -1,4 +1,4 @@
-#version: 1.38
+#version: 1.39
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -912,7 +912,6 @@ filter_all_na <- function(dat) {
   dat %>% filter(Reduce(`+`, lapply(., is.na)) != ncol(.))
 }
 
-iterations <- 5000
 
 ## if else prints org tree or no valid csv
 if (isTRUE(org_csvs_valid)) {
@@ -947,34 +946,41 @@ if (isTRUE(org_csvs_valid)) {
                 par <- x[['parentidentifier']]
                 path2 <- unlist(x)
                 i <- length(path2) + 1
+                iterations <- 100
+                can_recurse <- TRUE
 
+                while(!is.na(par) & length(path) < iterations & can_recurse){
 
-                while(!is.na(par) | i < (iterations + 1)){
-
-                    ## ensure that all the org branches connect
-                    if (i == iterations) {
-                        cat(
-                            'Orphaned Organizational Units Found in Org Chart\n',
-                            sprintf('Couldn\'t recurse the tree even after %s iterations', iterations),
-                            '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt")
-                        )
+                    if (!par %in% key2[['orgunitidentifier']]){
+                        can_recurse <- FALSE
                         break
                     }
 
+                    if (length(path2) > iterations){
+                        can_recurse <- FALSE
+                        break
+                    }
                     path2[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
                     par <- path2[i]
                     i <- i + 1
 
                 }
 
-                if (i >= 500) {
+                if (!can_recurse) {
                     return(NULL)
                 }
 
                 return(rev(c(stats::na.omit(unname(path2)))))
             })
 
-            if (length(unlist(struct)) != length(struct)) {
+            non_recurse_locs <- unlist(lapply(struct, function(x) any(is.null(x))))
+            if (sum(non_recurse_locs) > 0 ) {
+                cat(paste0(
+                    'Can\'t recurse the tree in some locations.\n\nOrphaned Organizational Units Found in Org Chart at:\n',
+                    paste(which(non_recurse_locs), collapse = ', ')
+                    ),
+                    '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt")
+                )
                 stop("Orphaned Organizational Units Found in Org Chart")
             }
 
