@@ -1,4 +1,4 @@
-#version: 1.37
+#version: 1.38
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -152,17 +152,17 @@ if (isTRUE(acc_csvs_valid)) {
     } else {
 
         ## actually makes the report
-          sink(
+        sink(
             file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
             append = FALSE,
             split = TRUE
-          )
+        )
         if(!is.null(did_id_check_work2$call) && did_id_check_work2$call == "vt_duplicated_rows"){
             print(did_id_check_work2)
         } else {
             valiData:::print.compare_column(did_id_check_work2)
         }
-          sink()
+        sink()
 
         ## Check if addition was successful
         ## Otherwise give error in browser
@@ -180,7 +180,7 @@ if (isTRUE(acc_csvs_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", accts)
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", accts, '\n\n\n')
     cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
 
 }
@@ -205,7 +205,7 @@ if (isTRUE(org_csvs_valid)) {
             parent.column='OrgUnitIdentifier',
             parent='OrgUnit',
             child = c('Course', 'Section'),
-            ignore.case = TRUE, 
+            ignore.case = TRUE,
             ignore.element.case = TRUE
         )
     )
@@ -231,11 +231,11 @@ if (isTRUE(org_csvs_valid)) {
 
 
         ## actually makes the report
-          sink(
+        sink(
             file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
             append = isTRUE(acc_csvs_valid),
             split = TRUE
-          )
+        )
 
         if(!is.null(did_id_check_work3$call) && did_id_check_work3$call == "vt_duplicated_rows"){
             print(did_id_check_work3)
@@ -271,9 +271,17 @@ if (isTRUE(org_csvs_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", orgunits)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", orgunits, '\n\n\n')
 
+    sink(
+        file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+        append = isTRUE(acc_csvs_valid),
+        split = TRUE
+    )
+
+    cat(comp)
+
+    sink()
 }
 
 
@@ -320,11 +328,11 @@ if (isTRUE(course_csv_valid)) {
 
 
         ## actually makes the report
-          sink(
+        sink(
             file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
             append = isTRUE(acc_csvs_valid) | isTRUE(org_csvs_valid),
             split = TRUE
-          )
+        )
         if(!is.null(did_id_check_work4$call) && did_id_check_work4$call == "vt_duplicated_rows"){
             print(did_id_check_work4)
         } else {
@@ -359,9 +367,17 @@ if (isTRUE(course_csv_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", courseid)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", courseid, '\n\n\n')
 
+    sink(
+        file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+        append = isTRUE(acc_csvs_valid),
+        split = TRUE
+    )
+
+    cat(comp)
+
+    sink()
 }
 
 
@@ -448,9 +464,17 @@ if (isTRUE(sect_csvs_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", sect)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", sect, '\n\n\n')
 
+    sink(
+        file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+        append = isTRUE(acc_csvs_valid),
+        split = TRUE
+    )
+
+    cat(comp)
+
+    sink()
 }
 
 
@@ -529,13 +553,7 @@ if (isTRUE(sect_csvs_valid)) {
         }
     }
 
-} else {
-
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", sect)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
-
 }
-
 
 ##======================================================================
 ## Check that Section/TermIdentifier in child files is found in parent AcademicTerm/TermIdentifier
@@ -618,9 +636,17 @@ if (isTRUE(term_csvs_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", termident)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match personIDs against:\n", termident, '\n\n\n')
 
+    sink(
+        file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+        append = isTRUE(acc_csvs_valid),
+        split = TRUE
+    )
+
+    cat(comp)
+
+    sink()
 }
 
 
@@ -633,7 +659,7 @@ orgident<- file.path(basename(path), 'Courses/OrgUnit')
 org_csvs_valid <- file.exists(termident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
 dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
 
-if (isTRUE(term_csvs_valid)) {
+if (isTRUE(org_csvs_valid)) {
 
     ## check personID against accounts.csv
     did_id_check_work8 <- try(
@@ -643,7 +669,7 @@ if (isTRUE(term_csvs_valid)) {
             parent='OrgUnit',
             child = c('OrgUnit'),
             child.column = 'ParentIdentifier',
-            ignore.case = TRUE, 
+            ignore.case = TRUE,
             ignore.element.case = TRUE
         )
     )
@@ -708,9 +734,17 @@ if (isTRUE(term_csvs_valid)) {
 
 } else {
 
-    comp <- paste0("Could not find a single valid .csv file in  the following location to match OrgUnitIdentifiers against:\n", orgident)
-    cat(comp, file = file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"))
+    comp <- paste0("Could not find a single valid .csv file in  the following location to match OrgUnitIdentifiers against:\n", orgident, '\n\n\n')
 
+    sink(
+        file.path(basename(path), "`Reports/Cross_File_Comparisons_Report.txt"),
+        append = isTRUE(acc_csvs_valid),
+        split = TRUE
+    )
+
+    cat(comp)
+
+    sink()
 }
 
 
@@ -878,6 +912,8 @@ filter_all_na <- function(dat) {
   dat %>% filter(Reduce(`+`, lapply(., is.na)) != ncol(.))
 }
 
+iterations <- 5000
+
 ## if else prints org tree or no valid csv
 if (isTRUE(org_csvs_valid)) {
 
@@ -912,19 +948,23 @@ if (isTRUE(org_csvs_valid)) {
                 path2 <- unlist(x)
                 i <- length(path2) + 1
 
-    
-                while(!is.na(par) | i < 501){
+
+                while(!is.na(par) | i < (iterations + 1)){
 
                     ## ensure that all the org branches connect
-                    if (i == 500) {
-                        cat('Orphaned Organizational Units Found in Org Chart', '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt"))
+                    if (i == iterations) {
+                        cat(
+                            'Orphaned Organizational Units Found in Org Chart\n',
+                            sprintf('Couldn\'t recurse the tree even after %s iterations', iterations),
+                            '\n', file = file.path(path, "`Reports/Org_Unit_Structure.txt")
+                        )
                         break
                     }
 
                     path2[i] <- key2[['parentidentifier']][match(par, key2[['orgunitidentifier']])]
                     par <- path2[i]
                     i <- i + 1
-              
+
                 }
 
                 if (i >= 500) {
@@ -952,16 +992,16 @@ if (isTRUE(org_csvs_valid)) {
             cat(paste0(
                 valiData:::header('Org Chart', char = "="),
                 paste(
-                    gsub(rep, '', ptree), 
-                    collapse = '\n')), '\n', 
+                    gsub(rep, '', ptree),
+                    collapse = '\n')), '\n',
                 file = file.path(basename(path), "`Reports/Org_Unit_Structure.txt")
             )
 
         } else {
 
             end <- ifelse(
-                nas == 0, 
-                "' does not contain a single empty value.", 
+                nas == 0,
+                "' does not contain a single empty value.",
                 "' contains multiple empty values.\nShould only be one empty for the top of the org chart."
             )
             comp <- paste0("The CSV file in '", orgident, end)
