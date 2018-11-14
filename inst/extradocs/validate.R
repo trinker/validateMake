@@ -1,4 +1,4 @@
-#version: 1.41
+#version: 1.42
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -568,7 +568,7 @@ termident <- file.path(basename(path), 'Courses/Section')
 term_csvs_valid <- file.exists(termident) && length(dir(termident, pattern = ".csv$|.CSV$")) > 0
 dir(termident, pattern = ".csv$|.CSV$"); file.exists(termident)
 
-    
+
 if (!isTRUE(acad_csvs_valid)) {
 
     comp <- paste0("No valid .csv file in  the following location to match personIDs against:\n", acadident, '\n\n\n')
@@ -582,9 +582,9 @@ if (!isTRUE(acad_csvs_valid)) {
     cat(comp)
 
     sink()
-    
+
     term_csvs_valid <- acad_csvs_valid
-    
+
 } else {
 
     ## First ensure 'Section/TermIdentifier/xxx.csv' exists
