@@ -15,7 +15,7 @@ map_loc <- 'bin/Core_Data_Dictionary_DS_longforms.xlsx'
 # Install dependencies
 #=====================
 options(repos="http://cran.rstudio.com/")
-if (!require("rlang") | utils::packageVersion('rlang') < 0.2.0) install.packages("rlang")
+if (!require("rlang") | utils::packageVersion('rlang') < '0.2.0') install.packages("rlang")
 if (!require("DiagrammeR")) install.packages("DiagrammeR")
 if (!require("data.tree")) install.packages("data.tree", type = 'binary')
 if (!require("cellranger")) install.packages("cellranger")
