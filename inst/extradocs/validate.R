@@ -1,4 +1,4 @@
-#version: 1.42
+#version: 1.43
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -15,7 +15,7 @@ map_loc <- 'bin/Core_Data_Dictionary_DS_longforms.xlsx'
 # Install dependencies
 #=====================
 options(repos="http://cran.rstudio.com/")
-if (!require("rlang") | utils::packageVersion('rlang') < '0.2.0') install.packages("rlang")
+#if (!require("rlang") | utils::packageVersion('rlang') < '0.2.0') install.packages("rlang")
 if (!require("DiagrammeR")) install.packages("DiagrammeR")
 if (!require("data.tree")) install.packages("data.tree", type = 'binary')
 if (!require("cellranger")) install.packages("cellranger")
@@ -27,6 +27,9 @@ if (!require("devtools")) install.packages("devtools")
 if (!require("readr")) install.packages("readr")
 if (!require("textshape")) install.packages("textshape")
 devtools::install_github("trinker/valiData")
+
+update.packages(ask = FALSE, checkBuilt = TRUE)
+
 
 ## Check if valiData is installed
 valiData_available <- require('valiData')
