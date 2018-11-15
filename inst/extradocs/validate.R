@@ -28,7 +28,7 @@ if (!require("readr")) install.packages("readr")
 if (!require("textshape")) install.packages("textshape")
 devtools::install_github("trinker/valiData")
 
-update.packages(ask = FALSE, checkBuilt = TRUE)
+## update.packages(ask = FALSE, checkBuilt = TRUE)
 
 
 ## Check if valiData is installed
