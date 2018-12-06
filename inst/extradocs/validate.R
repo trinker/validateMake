@@ -1,4 +1,4 @@
-#version: 1.43
+#version: 1.44
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 
@@ -23,13 +23,12 @@ if (!require("hms")) install.packages("hms")
 if (!require("dplyr")) install.packages("dplyr")
 if (!require("tibble")) install.packages("tibble")
 if (!require("data.table")) install.packages("data.table")
-if (!require("devtools")) install.packages("devtools")
+if (!require("remotes")) install.packages("remotes")
 if (!require("readr")) install.packages("readr")
 if (!require("textshape")) install.packages("textshape")
-devtools::install_github("trinker/valiData")
+remotes::install_github('trinker/valiData', dependencies = TRUE)
 
-## update.packages(ask = FALSE, checkBuilt = TRUE)
-
+update.packages(ask = FALSE, checkBuilt = TRUE)
 
 ## Check if valiData is installed
 valiData_available <- require('valiData')
@@ -936,8 +935,8 @@ if (!file.exists(file.path(basename(path), "`Reports/Email_Summary.txt"))) {
 ## Print Org Unit Chart
 ##=====================
 ## First ensure 'Courses/OrgUnit/xxx.csv' exists
-orgident <- file.path(basename(path), 'Courses/OrgUnit')
-org_csvs_valid <- file.exists(orgident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
+orgident <- file.path(basename(path), 'Course/OrgUnit')
+org_csvs_valid <- dir.exists(orgident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
 dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
 
 filter_all_na <- function(dat) {
