@@ -1,6 +1,8 @@
-#version: 1.44
+#version: 1.45
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
+getRversion()
+R.home()
 
 #=====================
 ## directory variables
@@ -15,20 +17,15 @@ map_loc <- 'bin/Core_Data_Dictionary_DS_longforms.xlsx'
 # Install dependencies
 #=====================
 options(repos="http://cran.rstudio.com/")
-#if (!require("rlang") | utils::packageVersion('rlang') < '0.2.0') install.packages("rlang")
-if (!require("DiagrammeR")) install.packages("DiagrammeR")
-if (!require("data.tree")) install.packages("data.tree", type = 'binary')
-if (!require("cellranger")) install.packages("cellranger")
-if (!require("hms")) install.packages("hms")
-if (!require("dplyr")) install.packages("dplyr")
-if (!require("tibble")) install.packages("tibble")
-if (!require("data.table")) install.packages("data.table")
-if (!require("remotes")) install.packages("remotes")
-if (!require("readr")) install.packages("readr")
-if (!require("textshape")) install.packages("textshape")
-remotes::install_github('trinker/valiData', dependencies = TRUE)
 
 update.packages(ask = FALSE, checkBuilt = TRUE)
+
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github('trinker/valiData', dependencies = TRUE)
+
+if (!require("DiagrammeR")) install.packages("DiagrammeR")
+if (!require("data.tree")) install.packages("data.tree", type = 'binary')
+
 
 ## Check if valiData is installed
 valiData_available <- require('valiData')
