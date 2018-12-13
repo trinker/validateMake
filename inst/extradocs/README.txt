@@ -1,4 +1,4 @@
-#version:  025
+#version:  027
 This app is a validator program for validating data inputs against a Campus Labs Core Data Dictionary (CDD) of expected file and variable types.
 
 For a video demonstration of these instructions go to:
@@ -10,7 +10,7 @@ Installation:
 
 You can get the newest version from:
 
-https://campuslabsinc.sharepoint.com/sites/DataScience/Shared%20Documents/Data%20Validating/TestCore_v.025.zip
+https://campuslabsinc.sharepoint.com/sites/DataScience/Shared%20Documents/Data%20Validating/TestCore_v.027.zip
 
 1. Unzip TestCore.zip in a utility program such as 7zip
 2. Place the unzipped program directory whereever you'd like
@@ -37,4 +37,4 @@ The institution core data file will now contain a '`Reports' file inside which h
 	- `Org_Unit_Structure.txt`
 	- `Email_Summary.txt`
 
-The first one checks that each file meets the schema expectations from the CDD.  The second file ensures cross file expectations are met.  For example, it ensures that if a `CourseIdentifier` is found in the file 'Courses/Section/xxx.csv' then these elements must also be found in the parent 'Courses/Course/xxx.csv'.  The third file prints a tree structure for the org unit from the COurses directory if this file exists and has the proper headers.  The last file is an email prepared version of the errors from the first 2 reports.
+The first one checks that each file meets the schema expectations from the CDD.  The second file ensures cross file expectations are met.  For example, it ensures that if a `CourseIdentifier` is found in the file 'Courses/Section/xxx.csv' then these elements must also be found in the parent 'Courses/Course/xxx.csv'.  The third file prints a tree structure for the org unit from the Courses directory if this file exists and has the proper headers.  The last file is an email prepared version of the errors from the first 2 reports.
