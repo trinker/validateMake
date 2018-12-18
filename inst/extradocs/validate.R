@@ -1,4 +1,4 @@
-#version: 1.45
+#version: 1.46
 html_message <- "<!doctype html>\n<html>\n<head>\n<title>HTML min</title>\n</head>\n<body><p style='font-size: 200%%'>\n%s  Contact Data Science with the following items:<br><ul><li>The institution files that were tested (zip them)</li><li>'~/TestCore/bin/validate.Rout file'</li></ul></p><br><br><br><br><br><br><img src=\"http://drinkboxstudios.com/blog/wp-content/uploads/2012/02/simpsons-doh2_480x360.jpg\" width=\"540\" height=\"360\"></body>\n</html>"
 
 getRversion()
@@ -25,6 +25,10 @@ remotes::install_github('trinker/valiData', dependencies = TRUE)
 
 if (!require("DiagrammeR")) install.packages("DiagrammeR")
 if (!require("data.tree")) install.packages("data.tree", type = 'binary')
+
+require("dplyr")
+require("DiagrammeR")
+require("data.tree")
 
 
 ## Check if valiData is installed
@@ -932,21 +936,22 @@ if (!file.exists(file.path(basename(path), "`Reports/Email_Summary.txt"))) {
 ## Print Org Unit Chart
 ##=====================
 ## First ensure 'Courses/OrgUnit/xxx.csv' exists
-orgident <- file.path(basename(path), 'Course/OrgUnit')
+orgident <- file.path(basename(path), 'Courses/OrgUnit')
 org_csvs_valid <- dir.exists(orgident) && length(dir(orgident, pattern = ".csv$|.CSV$")) > 0
 dir(orgident, pattern = ".csv$|.CSV$"); file.exists(orgident)
 
 filter_all_na <- function(dat) {
-  dat %>% filter(Reduce(`+`, lapply(., is.na)) != ncol(.))
+  dat %>% dplyr::filter(Reduce(`+`, lapply(., is.na)) != ncol(.))
 }
 
+`%>%` <- dplyr::`%>%`
 
 ## if else prints org tree or no valid csv
 if (isTRUE(org_csvs_valid)) {
 
     org <- readr::read_csv(dir(orgident, pattern = ".csv$|.CSV$", full.names = TRUE)) %>%
         stats::setNames(tolower(names(.))) %>%
-        mutate(
+        dplyr::mutate(
             parentidentifier = tolower(parentidentifier),
             orgunitidentifier = tolower(orgunitidentifier)
         )
