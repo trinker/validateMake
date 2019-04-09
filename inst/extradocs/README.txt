@@ -1,4 +1,4 @@
-#version:  028
+#version:  029
 This app is a validator program for validating data inputs against a Campus Labs Core Data Dictionary (CDD) of expected file and variable types.
 
 For a video demonstration of these instructions go to: 
@@ -10,7 +10,7 @@ Installation:
 
 You can get the newest version from:
 
-https://campuslabsinc.sharepoint.com/sites/DataScience/Shared%20Documents/Data%20Validating/TestCore_v.028.zip
+https://campuslabsinc.sharepoint.com/sites/DataScience/Shared%20Documents/Data%20Validating/TestCore_v.029.zip
 
 1. Unzip TestCore.zip in a utility program such as 7zip
 2. Place the unzipped program directory where ever you'd like
