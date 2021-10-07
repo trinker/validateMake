@@ -1,8 +1,8 @@
-#version:  030
-This app is a validator program for validating data inputs against a Campus Labs Core Data Dictionary (CDD) of expected file and variable types.
+#version:  032
+This app is a validator program for validating data inputs against the Core Data Dictionary (CDD) of expected file and variable types.
 
 For a video demonstration of these instructions go to: 
-https://campuslabsinc.sharepoint.com/sites/DataScience/_layouts/15/guestaccess.aspx?guestaccesstoken=7yVAkpyj%2b9Zyae3cGcB5YntO2bUCESpHLpOGwq8ntgI%3d&docid=2_02a65d72c341b41caaa0f47aa01b6a81c&rev=1
+https://anthologyinc.sharepoint.com/:v:/s/DataScienceCL/ERXYDxCNtPVKsZgrQ3YSGyUBn4n4MkAsPYVKGLiNBJjLMg?e=A4ao61
 
 -------------
 Installation:
@@ -10,9 +10,10 @@ Installation:
 
 You can get the newest version from:
 
-https://campuslabsinc.sharepoint.com/sites/DataScience/Shared%20Documents/Data%20Validating/TestCore_v.030.zip
+https://anthologyinc.sharepoint.com/:f:/s/DataScienceCL/EnBR5MPwq41GlBGTeoerzAgBgbIpxU4MQZ0Y_hm_fIBklQ?e=rDUvcq
 
-1. Unzip TestCore .zip in a utility program such as 7zip (Microsoft may warn you that it's a high risk because it is a .zip file; you can ignore this)
+1. Select version 032
+2. Unzip TestCore .zip in a utility program such as 7zip (Microsoft may warn you that it's a high risk because it is a .zip file; you can ignore this)
 2. Place the unzipped program directory where ever you'd like
 3. Go to '~\TestCore\bin' and press the 'install_r.bat' button (may appear as just 'install_r')
 4. This will install the R program
