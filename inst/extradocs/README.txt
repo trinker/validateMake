@@ -1,5 +1,5 @@
-#version:  032
-This app is a validator program for validating data inputs against the Core Data Dictionary (CDD) of expected file and variable types.
+#version:  033
+This app is a Windows based validator program for validating data inputs against the Core Data Dictionary (CDD) of expected file and variable types.  It utilizes a .bat file to run R scripts that validate file structure, field names, and cell inputs.
 
 For a video demonstration of these instructions go to: 
 https://anthologyinc.sharepoint.com/:v:/s/DataScienceCL/ERXYDxCNtPVKsZgrQ3YSGyUBn4n4MkAsPYVKGLiNBJjLMg?e=A4ao61
@@ -12,11 +12,16 @@ You can get the newest version from:
 
 https://anthologyinc.sharepoint.com/:f:/s/DataScienceCL/EnBR5MPwq41GlBGTeoerzAgBgbIpxU4MQZ0Y_hm_fIBklQ?e=rDUvcq
 
-1. Select version 032
+1.  Select version the latest version .zip file (TestCor_v.###.zip) 
 2. Unzip TestCore .zip in a utility program such as 7zip (Microsoft may warn you that it's a high risk because it is a .zip file; you can ignore this)
-2. Place the unzipped program directory where ever you'd like
-3. Go to '~\TestCore\bin' and press the 'install_r.bat' button (may appear as just 'install_r')
-4. This will install the R program
+3. Place the unzipped program directory where ever you'd like
+4. For both 'bin/install_r.bat' and 'button.bat' files:
+    a. Right-click 
+	b. Properties 
+	C. Uncheck the "Unblock" option on the properties tab
+	D. Apply and Save 
+5. Go to '~\TestCore\bin' and press the 'install_r.bat' button (may appear as just 'install_r')
+6. This will install the R program
 
 You're ready to validate Core Data files.
 
@@ -25,7 +30,7 @@ Usage:
 ------
 
 1. Move an institution core data folder inside of 'TestCore' directory
-2. Click 'button.bat' (may appear as just 'button')
+2. Click 'button.bat' (may appear as just 'button' if you don't have showing file extension enabled on your computer)
 
 -------
 Output:
