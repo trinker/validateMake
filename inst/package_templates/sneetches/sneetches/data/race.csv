@@ -1,0 +1,313 @@
+normed,black,american_native,asian,hawaiian_pacific_islander,white,hispanic_latino,multiracial,unknown,bad_format,minority
+,,,,,,,,TRUE,,
+2 or more races,,,,,,,TRUE,TRUE,FALSE,TRUE
+2_plus,,,,,,,TRUE,TRUE,FALSE,TRUE
+african american,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+african american (),TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+"african american, black",TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+alaskan native/american indian,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native american,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+am. indian or alaskan native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+amer ind & alaskan native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+amer indian or alaskan native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+amer. indian/alaskan,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american indian native american,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american indian or alaska native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american indian or alaskan native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+"american indian, alaskan native",FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american indian/alaska native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american indian/alaskan native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+american/alaska native,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+americanindianalaskanative,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+an (american indian or alaska native white),FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE
+an (american indian or alaska native),FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+asian,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+as (asian white),FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE
+as (asian),FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+asian american,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+asian or pacific islander,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE
+asian pacific islander,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE
+asian/pacific islander,FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE
+black,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+bl (black or african american white),TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE
+bl (black or african american),TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+black (),TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+black or african american,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+black or africanamerican,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+black/african american,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+blackafricanamerican,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+caucasian,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+"caucasian, white",FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+foreign,,,,,,,,TRUE,FALSE,
+grape,,,,,,,,TRUE,FALSE,
+hawaii or pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+hawaiian,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+hawaiian or pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+hawaiian/pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+his (hispanic/latino),,,,,,TRUE,,TRUE,FALSE,TRUE
+hispa,,,,,,TRUE,,TRUE,FALSE,TRUE
+hispanic,,,,,,TRUE,,TRUE,FALSE,TRUE
+hispanic american,,,,,,TRUE,,TRUE,FALSE,TRUE
+hispanic of any race,,,,,,TRUE,,TRUE,FALSE,TRUE
+hispanic/latino,,,,,,TRUE,,TRUE,FALSE,TRUE
+hispanics of any race,,,,,,TRUE,,TRUE,FALSE,TRUE
+hp,,,,,,TRUE,,TRUE,FALSE,TRUE
+hp (native hawaiian or other pacific islander),FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,,TRUE,FALSE,TRUE
+indian,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+international,,,,,,,,TRUE,FALSE,
+intnl stu (internal code),,,,,,,,TRUE,FALSE,
+ipeds value not calculated,,,,,,,,TRUE,FALSE,
+middle eastern,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE
+minority,,,,,,,,TRUE,FALSE,TRUE
+missing,,,,,,,,TRUE,FALSE,
+multiracial,,,,,,,TRUE,TRUE,FALSE,TRUE
+multi,,,,,,,TRUE,TRUE,FALSE,TRUE
+multi racial,,,,,,,TRUE,TRUE,FALSE,TRUE
+multiple race,,,,,,,TRUE,TRUE,FALSE,TRUE
+multiple races,,,,,,,TRUE,TRUE,FALSE,TRUE
+n/a,,,,,,,,TRUE,FALSE,
+unknown,,,,,,,,TRUE,FALSE,
+nat hawaiian/pacific isla,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native american/alaskan,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native hawaiian and other pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native hawaiian or other pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native hawaiian/oth pac island,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native hawaiian/other pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+native hawaiian/pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+nativehawaiianpacificislander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+nhs (/latino),,,,,,TRUE,,TRUE,FALSE,TRUE
+no response,,,,,,,,TRUE,FALSE,
+non resident alien,,,,,,,,TRUE,FALSE,
+nonresident alien,,,,,,,,TRUE,FALSE,
+north african,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+not reported,,,,,,,,TRUE,FALSE,
+not specified,,,,,,,,TRUE,FALSE,
+notspecified,,,,,,,,TRUE,FALSE,
+np (asian/pacific islander),FALSE,FALSE,TRUE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,TRUE
+nspec,,,,,,,,TRUE,FALSE,
+other,,,,,,,,TRUE,FALSE,
+pacific islander,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+pacific islander/ native hawaiian,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+prefer to not answer,,,,,,,,TRUE,FALSE,
+race and ethnicity unknown,,,,,,,,TRUE,FALSE,
+race unknown,,,,,,,,TRUE,FALSE,
+race/ethnicity unknown,,,,,,,,TRUE,FALSE,
+resident alien,,,,,,,,TRUE,FALSE,
+three,,,,,,,,TRUE,FALSE,
+two or more races,,,,,,,TRUE,TRUE,FALSE,TRUE
+two or more selected,,,,,,,TRUE,TRUE,FALSE,TRUE
+twoormoreraces,,,,,,,TRUE,TRUE,FALSE,TRUE
+un (unknown),,,,,,,,TRUE,FALSE,
+unidentified,,,,,,,,TRUE,FALSE,
+unknown race/ethnicity,,,,,,,,TRUE,FALSE,
+unknown/not reported,,,,,,,,TRUE,FALSE,
+unknown/undeclared,,,,,,,,TRUE,FALSE,
+west indian,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+white,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+wh (white american indian or alaska native),FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE,FALSE
+wh (white),FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+white (),FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+white caucasian,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+white race,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+"black,",TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE
+"white,",FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE
+Afghan,,,,,,,,,nationality,
+Albanian,,,,,,,,,nationality,
+Algerian,,,,,,,,,nationality,
+Andorran,,,,,,,,,nationality,
+Angolan,,,,,,,,,nationality,
+Argentinian,,,,,,,,,nationality,
+Armenian,,,,,,,,,nationality,
+Australian,,,,,,,,,nationality,
+Austrian,,,,,,,,,nationality,
+Azerbaijani,,,,,,,,,nationality,
+Bahamian,,,,,,,,,nationality,
+Bahraini,,,,,,,,,nationality,
+Bangladeshi,,,,,,,,,nationality,
+Barbadian,,,,,,,,,nationality,
+Belarusian,,,,,,,,,nationality,
+Belarusan,,,,,,,,,nationality,
+Belgian,,,,,,,,,nationality,
+Belizian,,,,,,,,,nationality,
+Beninese,,,,,,,,,nationality,
+Bhutanese,,,,,,,,,nationality,
+Bolivian,,,,,,,,,nationality,
+Bosnian,,,,,,,,,nationality,
+Tswana,,,,,,,,,nationality,
+Brazilian,,,,,,,,,nationality,
+Briton,,,,,,,,,nationality,
+Bruneian,,,,,,,,,nationality,
+Bulgarian,,,,,,,,,nationality,
+Burkinese,,,,,,,,,nationality,
+Burmese,,,,,,,,,nationality,
+Burundian,,,,,,,,,nationality,
+Cambodian,,,,,,,,,nationality,
+Cameroonian,,,,,,,,,nationality,
+Canadian,,,,,,,,,nationality,
+Cape Verdean,,,,,,,,,nationality,
+Chadian,,,,,,,,,nationality,
+Chilean,,,,,,,,,nationality,
+Chinese,,,,,,,,,nationality,
+Colombian,,,,,,,,,nationality,
+Congolese,,,,,,,,,nationality,
+Costa Rican,,,,,,,,,nationality,
+Croat,,,,,,,,,nationality,
+Croatian,,,,,,,,,nationality,
+Cuban,,,,,,,,,nationality,
+Cypriot,,,,,,,,,nationality,
+Czech,,,,,,,,,nationality,
+Dane,,,,,,,,,nationality,
+Djiboutian,,,,,,,,,nationality,
+Dominican,,,,,,,,,nationality,
+Dominican,,,,,,,,,nationality,
+Ecuadorean,,,,,,,,,nationality,
+Egyptian,,,,,,,,,nationality,
+Salvadorean,,,,,,,,,nationality,
+Englishman,,,,,,,,,nationality,
+Englishwoman,,,,,,,,,nationality,
+Eritrean,,,,,,,,,nationality,
+Estonian,,,,,,,,,nationality,
+Ethiopian,,,,,,,,,nationality,
+Fijian,,,,,,,,,nationality,
+Finn,,,,,,,,,nationality,
+Frenchman,,,,,,,,,nationality,
+Frenchwoman,,,,,,,,,nationality,
+Gabonese,,,,,,,,,nationality,
+Gambian,,,,,,,,,nationality,
+Georgian,,,,,,,,,nationality,
+German,,,,,,,,,nationality,
+Ghanaian,,,,,,,,,nationality,
+Greek,,,,,,,,,nationality,
+Grenadian,,,,,,,,,nationality,
+Guatemalan,,,,,,,,,nationality,
+Guinean,,,,,,,,,nationality,
+Guyanese,,,,,,,,,nationality,
+Haitian,,,,,,,,,nationality,
+Dutchman,,,,,,,,,nationality,
+Dutchwoman,,,,,,,,,nationality,
+Honduran,,,,,,,,,nationality,
+Hungarian,,,,,,,,,nationality,
+Icelander,,,,,,,,,nationality,
+Indian,,,,,,,,,nationality,
+Indonesian,,,,,,,,,nationality,
+Iranian,,,,,,,,,nationality,
+Iraqi,,,,,,,,,nationality,
+Irishman,,,,,,,,,nationality,
+Irishwoman,,,,,,,,,nationality,
+Israeli,,,,,,,,,nationality,
+Italian,,,,,,,,,nationality,
+Jamaican,,,,,,,,,nationality,
+Japanese,,,,,,,,,nationality,
+Jordanian,,,,,,,,,nationality,
+Kazakh,,,,,,,,,nationality,
+Kenyan,,,,,,,,,nationality,
+Kuwaiti,,,,,,,,,nationality,
+Laotian,,,,,,,,,nationality,
+Latvian,,,,,,,,,nationality,
+Lebanese,,,,,,,,,nationality,
+Liberian,,,,,,,,,nationality,
+Libyan,,,,,,,,,nationality,
+Liechtensteiner,,,,,,,,,nationality,
+Lithuanian,,,,,,,,,nationality,
+Luxembourger,,,,,,,,,nationality,
+Macedonian,,,,,,,,,nationality,
+Malagasy,,,,,,,,,nationality,
+Madagascan,,,,,,,,,nationality,
+Malawian,,,,,,,,,nationality,
+Malaysian,,,,,,,,,nationality,
+Maldivian,,,,,,,,,nationality,
+Malian,,,,,,,,,nationality,
+Maltese,,,,,,,,,nationality,
+Mauritanian,,,,,,,,,nationality,
+Mauritian,,,,,,,,,nationality,
+Mexican,,,,,,,,,nationality,
+Moldovan,,,,,,,,,nationality,
+Monegasque,,,,,,,,,nationality,
+Monacan,,,,,,,,,nationality,
+Mongolian,,,,,,,,,nationality,
+Montenegrin,,,,,,,,,nationality,
+Moroccan,,,,,,,,,nationality,
+Mozambican,,,,,,,,,nationality,
+Namibian,,,,,,,,,nationality,
+Nepalese,,,,,,,,,nationality,
+Dutchman,,,,,,,,,nationality,
+Dutchwoman,,,,,,,,,nationality,
+Netherlander,,,,,,,,,nationality,
+New Zealander,,,,,,,,,nationality,
+Nicaraguan,,,,,,,,,nationality,
+Nigerien,,,,,,,,,nationality,
+Nigerian,,,,,,,,,nationality,
+North Korean,,,,,,,,,nationality,
+Norwegian,,,,,,,,,nationality,
+Omani,,,,,,,,,nationality,
+Pakistani,,,,,,,,,nationality,
+Panamanian,,,,,,,,,nationality,
+Papua New Guinean,,,,,,,,,nationality,
+Guinean,,,,,,,,,nationality,
+Paraguayan,,,,,,,,,nationality,
+Peruvian,,,,,,,,,nationality,
+Filipino,,,,,,,,,nationality,
+Pole,,,,,,,,,nationality,
+Portuguese,,,,,,,,,nationality,
+Qatari,,,,,,,,,nationality,
+Romanian,,,,,,,,,nationality,
+Russian,,,,,,,,,nationality,
+Rwandan,,,,,,,,,nationality,
+Saudi Arabian,,,,,,,,,nationality,
+Saudi,,,,,,,,,nationality,
+Scot,,,,,,,,,nationality,
+Senegalese,,,,,,,,,nationality,
+Serb,,,,,,,,,nationality,
+Serbian,,,,,,,,,nationality,
+Seychellois,,,,,,,,,nationality,
+Sierra Leonian,,,,,,,,,nationality,
+Singaporean,,,,,,,,,nationality,
+Slovak,,,,,,,,,nationality,
+Slovene,,,,,,,,,nationality,
+Slovenian,,,,,,,,,nationality,
+Solomon Islander,,,,,,,,,nationality,
+Somali,,,,,,,,,nationality,
+South African,,,,,,,,,nationality,
+South Korean,,,,,,,,,nationality,
+Spaniard,,,,,,,,,nationality,
+Sri Lankan,,,,,,,,,nationality,
+Sudanese,,,,,,,,,nationality,
+Surinamer,,,,,,,,,nationality,
+Surinamese,,,,,,,,,nationality,
+Swazi,,,,,,,,,nationality,
+Swede,,,,,,,,,nationality,
+Swiss,,,,,,,,,nationality,
+Syrian,,,,,,,,,nationality,
+Taiwanese,,,,,,,,,nationality,
+Tajik,,,,,,,,,nationality,
+Tadjik,,,,,,,,,nationality,
+Tanzanian,,,,,,,,,nationality,
+Thai,,,,,,,,,nationality,
+Togolese,,,,,,,,,nationality,
+Trinidadian,,,,,,,,,nationality,
+Tobagan,,,,,,,,,nationality,
+Tobagonian,,,,,,,,,nationality,
+Tunisian,,,,,,,,,nationality,
+Turk,,,,,,,,,nationality,
+Turkmen,,,,,,,,,nationality,
+Turkoman,,,,,,,,,nationality,
+Tuvaluan,,,,,,,,,nationality,
+Ugandan,,,,,,,,,nationality,
+Ukrainian,,,,,,,,,nationality,
+Emirati,,,,,,,,,nationality,
+Briton,,,,,,,,,nationality,
+US citizen,,,,,,,,,nationality,
+Uruguayan,,,,,,,,,nationality,
+Uzbek,,,,,,,,,nationality,
+Vanuatuan,,,,,,,,,nationality,
+Venezuelan,,,,,,,,,nationality,
+Vietnamese,,,,,,,,,nationality,
+Welshman,,,,,,,,,nationality,
+Welshwoman,,,,,,,,,nationality,
+Western Samoan,,,,,,,,,nationality,
+Yemeni,,,,,,,,,nationality,
+Yugoslav,,,,,,,,,nationality,
+Zairean,,,,,,,,,nationality,
+Zambian,,,,,,,,,nationality,
+Zimbabwean,,,,,,,,,nationality,

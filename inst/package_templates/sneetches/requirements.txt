@@ -1,0 +1,4 @@
+pandas>=1.4.0
+pyperclip
+statsmodels
+Click>=7.0

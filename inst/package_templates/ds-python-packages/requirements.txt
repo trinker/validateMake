@@ -1,0 +1,13 @@
+azure-core>=1.21.1
+azure-datalake-store>=0.0.52
+azure-identity>=1.7.1
+pandas>=1.4.0
+pyyaml
+munch
+keyring
+cryptography
+pyodbc
+tqdm
+sqlalchemy
+##-e git+https://campuslabs@dev.azure.com/campuslabs/Data%20Science/_git/sneetches#egg=sneetches
+sneetches @ git+https://dev.azure.com/campuslabs/Data%20Science/_git/sneetches

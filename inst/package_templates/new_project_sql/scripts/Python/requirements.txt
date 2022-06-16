@@ -1,0 +1,7 @@
+ds @ git+https://dev.azure.com/campuslabs/Data%20Science/_git/ds-python-packages
+numpy
+pandas
+pyodbc
+tabulate
+scikit-learn
+matplotlib
